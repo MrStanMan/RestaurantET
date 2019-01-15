@@ -23,7 +23,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Route to the contact page.
+Route::get('/contact', 'HomeController@contact');
 
-Route::get('/contact', 'HomeController@contact')->name('contact');
+
+//Route to the about page.
+Route::get('/about', 'HomeController@about');
 
 
