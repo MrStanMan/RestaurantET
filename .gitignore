@@ -11,3 +11,5 @@ npm-debug.log
 yarn-error.log
 *.md
 README.md
+composer.lock
+composer.lock
