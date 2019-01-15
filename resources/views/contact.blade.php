@@ -11,19 +11,21 @@
                     <form method="POST" action="">
                         @csrf
 						<div class="form-group">
-							<label for="contactname">Naam</label>
-							<input type="text" class="form-control" id="contactname">
+							<label for="contactname">Naam *</label>
+							<input type="text" class="form-control" id="contactname" required>
 						</div>
 						<div class="form-group">
-							<label for="contactemail">Email</label>
-							<input type="text" class="form-control" id="contactemail">
+							<label for="contactemail">Email *</label>
+							<input type="text" class="form-control" id="contactemail" required>
 						</div>
 						<div class="form-group">
-							<label for="contactmessage">Uw bericht</label>
-							<textarea class="form-control" id="contactmessage" rows="3"></textarea>
+							<label for="contactmessage">Uw bericht *</label>
+							<textarea class="form-control" id="contactmessage" rows="3" required></textarea>
 						</div>
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary">Verstuur</button>
+						
+						<div class="form-group" width="100%">
+							<label>* Vereist</label>
+							<button style="margin-left: calc(100% - 139px);" type="submit" class="btn btn-primary">Verstuur</button>
 						</div>	
                     </form>
                 </div>
