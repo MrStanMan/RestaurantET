@@ -2,13 +2,17 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Customer extends Model
 {
     use Notifiable;
+
+    protected $primaryKey = 'customer_nr';
+    public $table = 'customer';
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'customer_nr', 'password', 'last_name', 'insertion', 'first_name', 'address', 'zipcode', 'telephone_nr', 'email', 'email_verified_at', 'remember_token'
     ];
 
     /**
@@ -27,4 +31,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function Customer()
+    {
+    	$user = factory(Customer::class)->create();
+    }
 }
