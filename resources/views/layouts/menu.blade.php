@@ -66,16 +66,14 @@
     color: #fff;
     background-color: #3c3c3c;
 }
-.sidebar-nav li:nth-child(2):before {
-    background-color: #b1b1b1;   
-}
-.sidebar-nav li:nth-child(3):before {
-    background-color: #b1b1b1;   
-}
-.sidebar-nav li:nth-child(4):before {
-    background-color: #b1b1b1;   
-}
-.sidebar-nav li:nth-child(5):before {
+.sidebar-nav li:nth-child(2):before,
+.sidebar-nav li:nth-child(3):before,
+.sidebar-nav li:nth-child(4):before,
+.sidebar-nav li:nth-child(5):before,
+.sidebar-nav li:nth-child(6):before,
+.sidebar-nav li:nth-child(7):before,
+.sidebar-nav li:nth-child(8):before
+{
     background-color: #b1b1b1;   
 }
 
@@ -149,7 +147,46 @@
 					<li>
 						<b><a href="{{ url('/restaurant/contact') }}">CONTACT</a></b>
 					</li>
+				
+				@if (Auth::guest())
+					<li style="top: 45vh; display: table;">
+						<b>
+							<a href="{{ route('login') }}">INLOGGEN</a>
+						</b>
+					</li>
+					<li style="top: 45vh; display: table;">
+						<b>
+							<a href="{{ route('register') }}">REGISTREREN</a>
+						</b>
+					</li>
+				@else
+						
+					@if (Auth::user()->rank >= 0)
+						<li>
+							<b>
+								<a href="{{ url('/profile/index') }}">
+									PROFIEL
+								</a>
+							</b>
+						</li>
+					@endif
+					
+					<li class="logout_button" style="top: 45vh; display: table; z-index: -4;">
+						<b>
+							<a href="{{ route('logout') }}"
+								onclick="event.preventDefault();
+									document.getElementById('logout-form').submit();">
+								LOG UIT
+							</a>
+						</b>
+						
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+							{{ csrf_field() }}
+						</form>
+					</li>
+				@endif
 				</ul>
+				
 			</nav>
 		</div>
 		
