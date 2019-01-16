@@ -11,23 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-//Route to the contact page.
-Route::get('/contact', 'HomeController@contact');
+// RESTAURANT ROUTES
+Route::get('/', 'HomepageController@getUrl');
+Route::get('/restaurant/{attribute}', 'HomepageController@getUrl');
+// END RESTAURANT ROUTES
 
 
-//Route to the about page.
-Route::get('/about', 'HomeController@about');
+// PROFILE ROUTES
+
+// END PROFILE ROUTES
 
 
+// MANAGER ROUTES
+
+// END MANAGER ROUTES
