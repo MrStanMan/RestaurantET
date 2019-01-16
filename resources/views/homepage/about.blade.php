@@ -1,7 +1,9 @@
 @extends('layouts.menu')
 
 @section('content')
-
-		<h1>ABOUT</h1>
-	
+<div class="container">
+	<h2 class="h2">Over ons</h2>
+	<div class="text">
+		Hier komt wat info te staan over restaurant Excellent Taste.
+</div>
 @endsection
