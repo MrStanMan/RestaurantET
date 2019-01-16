@@ -209,9 +209,9 @@
 								<a href="{{ route('register') }}">REGISTREREN</a>
 							</b>
 						</li>
-					@else
+					@endif
 						
-					@if (Auth::user()->rank >= 0)
+					@auth
 						<li style="top: 45vh; display: table;">
 							<b>
 								<a href="{{ url('/manager/index') }}">
@@ -222,6 +222,7 @@
 						
 					@endif
 					
+					@auth
 						<li class="logout_button" style="top: 45vh; display: table;">
 							<b>
 								<a href="{{ route('logout') }}"
