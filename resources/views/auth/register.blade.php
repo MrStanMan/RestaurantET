@@ -1,4 +1,4 @@
-@extends('layouts.menu')
+@extends('layouts.base')
 
 @section('content')
 <script src='https://www.google.com/recaptcha/api.js'></script>

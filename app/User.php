@@ -7,10 +7,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\VerifyEmail;
+use Laratrust\Traits\LaratrustUserTrait;
 
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use LaratrustUserTrait;
     use Notifiable;
 
     public $primaryKey = 'customer_nr';

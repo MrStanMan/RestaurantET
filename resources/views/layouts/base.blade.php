@@ -27,8 +27,10 @@
 <body>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12 jumbotron">
-			<img src="{{ asset('img/logo_black.png') }}">
+		<div class="col-md-12 jumbotron" style="padding:20px 20px;">
+			<a href="{{ route('home') }}">
+				<img src="{{ asset('img/logo_black.png') }}">
+			</a>
 		</div>
 		<div class="col-md-2">
 			<nav class="nav nav-pills flex-column">
@@ -39,24 +41,29 @@
 					<a class="flex-md-fill nav-item nav-link active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->first_name }} <span style="float: right;" ><i class="fas fa-chevron-down"></i></span></a>
 					<div class="dropdown-menu">
 				      	<a class="dropdown-item" href="{{ url('profile') }}/{{ Auth::user()->customer_nr }}">Mijn account</a>
+			      	@role('administrator')
 					      	<div class="dropdown-divider"></div>
-			      		<a class="dropdown-item" href="#">Admin Pagina</a>
+			      		<a class="dropdown-item" href="{{ route('admin_home') }}">Admin Pagina</a>
+			      	@endrole
 					      	<div class="dropdown-divider"></div>
 			      		<a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+								{{ csrf_field() }}
+							</form>
                                     </a>
 			    	</div>
 			    @endif
-			  <a class="flex-sm-fill nav-item nav-link" href="{{ route('about') }}">Over ons</a>
-			  <a class="flex-sm-fill nav-item nav-link" href="{{ route('contact') }}">Contact</a>
-			  <a class="flex-sm-fill nav-item nav-link" href="{{ route('menukaart') }}">Menu kaart</a>
-			  <a class="flex-sm-fill nav-item nav-link" href="#">Reserveren</a>
+				<a class="flex-sm-fill nav-item nav-link" href="{{ route('about') }}">Over ons</a>
+				<a class="flex-sm-fill nav-item nav-link" href="{{ route('contact') }}">Contact</a>
+				<a class="flex-sm-fill nav-item nav-link" href="{{ route('menukaart') }}">Menu kaart</a>
+				<a class="flex-sm-fill nav-item nav-link" href="{{ route('reserveer') }}">Reserveren</a>
 			</nav>
 		</div>
 	<!-- <div class="container"> -->
-		<div class="col-md-10 col-sm-10 col-lg-10 col-10">
+		<div class="col-md-10 col-sm-12 col-lg-10 col-12">
 			@yield('content')
 		</div>
 	<!-- </div> -->

@@ -5,7 +5,7 @@
 	<h2 class="h2">Contact</h2>
 	<div class="text">
 		Neem hier contact op met ons restaurant!
-	</div><br><br>
+	</div><br>
 	<div class="form">
 		<form method="POST" action="">
 			@csrf
