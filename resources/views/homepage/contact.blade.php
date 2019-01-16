@@ -24,7 +24,7 @@
 			
 			<div class="form-group" width="100%">
 				<label><i style="color: red;">*</i> Vereist</label>
-				<button style="margin-left: calc(100% - 139px);" type="submit" class="btn btn-primary">Verstuur</button>
+				<button style="margin-left: calc(100% - 147px);" type="submit" class="btn btn-primary">Verstuur</button>
 			</div>	
 		</form>
 	</div>
