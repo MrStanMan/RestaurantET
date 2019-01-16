@@ -21,7 +21,7 @@ Route::get('/restaurant/{attribute}', 'HomepageController@getUrl');
 
 
 // PROFILE ROUTES
-
+Route::get('/profile/{attribute}', 'ProfileController@getUrl');
 // END PROFILE ROUTES
 
 

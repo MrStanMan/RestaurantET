@@ -180,17 +180,17 @@
 								</li>
 								<li>
 									<b>
-										<a class="linkdropdown" href="#">RESERVEREN</a>
+										<a class="linkdropdown" href="{{ url('/profile/reservate') }}">RESERVEREN</a>
 									</b>
 								</li>
 								<li>
 									<b>
-										<a class="linkdropdown" href="#">RESERVATIES</a>
+										<a class="linkdropdown" href="{{ url('/profile/reservations') }}">RESERVATIES</a>
 									</b>
 								</li>
 								<li>
 									<b>
-										<a class="linkdropdown" href="#">NOTA'S</a>
+										<a class="linkdropdown" href="{{ url('/profile/notes') }}">NOTA'S</a>
 									</b>
 								</li>
 							</ul>
