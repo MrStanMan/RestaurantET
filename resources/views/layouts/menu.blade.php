@@ -43,7 +43,6 @@
 .sidebar-nav li {
     position: relative; 
     line-height: 20px;
-    display: inline-block;
     width: 100%;
 }
 
@@ -66,6 +65,7 @@
     color: #fff;
     background-color: #3c3c3c;
 }
+
 .sidebar-nav li:nth-child(2):before,
 .sidebar-nav li:nth-child(3):before,
 .sidebar-nav li:nth-child(4):before,
@@ -87,7 +87,8 @@
 
 }
 
-.sidebar-nav li a {
+.sidebar-nav li a
+{
     display: block;
     color: #000;
     text-decoration: none;
@@ -120,6 +121,19 @@
     background-color: #222;
     box-shadow: none;
 }
+
+#profilelinks {
+    height: 40px;
+    background: #f5f5f5;
+}
+
+#profilelinks span {
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    display: block;
+    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+}
 </style>
 <body>
 
@@ -147,44 +161,81 @@
 					<li>
 						<b><a href="{{ url('/restaurant/contact') }}">CONTACT</a></b>
 					</li>
-				
-				@if (Auth::guest())
-					<li style="top: 45vh; display: table;">
-						<b>
-							<a href="{{ route('login') }}">INLOGGEN</a>
-						</b>
-					</li>
-					<li style="top: 45vh; display: table;">
-						<b>
-							<a href="{{ route('register') }}">REGISTREREN</a>
-						</b>
-					</li>
-				@else
-						
+					
 					@if (Auth::user()->rank >= 0)
 						<li>
 							<b>
-								<a href="{{ url('/profile/index') }}">
-									PROFIEL
+								<a href="#profilelinks" data-toggle="collapse" aria-expanded="false">
+									<span class="glyphicon glyphicon-list" aria-hidden="true"></span> PROFIEL
 								</a>
 							</b>
+							
+							<ul class="nav sidebar-nav collapse" style="position: relative; width: 182px;" id="profilelinks">
+								<li>
+									<b>
+										<a href="#profilelinks" data-toggle="collapse" aria-expanded="false">
+											<span class="glyphicon glyphicon-option-vertical btn-group-lg" style="display: unset;" aria-hidden="true"></span>
+										</a>
+									</b>
+								</li>
+								<li>
+									<b>
+										<a class="linkdropdown" href="#">RESERVEREN</a>
+									</b>
+								</li>
+								<li>
+									<b>
+										<a class="linkdropdown" href="#">RESERVATIES</a>
+									</b>
+								</li>
+								<li>
+									<b>
+										<a class="linkdropdown" href="#">NOTA'S</a>
+									</b>
+								</li>
+							</ul>
 						</li>
 					@endif
 					
-					<li class="logout_button" style="top: 45vh; display: table; z-index: -4;">
-						<b>
-							<a href="{{ route('logout') }}"
-								onclick="event.preventDefault();
-									document.getElementById('logout-form').submit();">
-								LOG UIT
-							</a>
-						</b>
+				
+					@if (Auth::guest())
+						<li style="top: 45vh; display: table;">
+							<b>
+								<a href="{{ route('login') }}">INLOGGEN</a>
+							</b>
+						</li>
+						<li style="top: 45vh; display: table;">
+							<b>
+								<a href="{{ route('register') }}">REGISTREREN</a>
+							</b>
+						</li>
+					@else
 						
-						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-							{{ csrf_field() }}
-						</form>
-					</li>
-				@endif
+					@if (Auth::user()->rank >= 0)
+						<li style="top: 45vh; display: table;">
+							<b>
+								<a href="{{ url('/manager/index') }}">
+									BEHEER
+								</a>
+							</b>
+						</li>
+						
+					@endif
+					
+						<li class="logout_button" style="top: 45vh; display: table;">
+							<b>
+								<a href="{{ route('logout') }}"
+									onclick="event.preventDefault();
+										document.getElementById('logout-form').submit();">
+									LOG UIT
+								</a>
+							</b>
+							
+							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+								{{ csrf_field() }}
+							</form>
+						</li>
+					@endif
 				</ul>
 				
 			</nav>
