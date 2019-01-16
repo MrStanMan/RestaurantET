@@ -56,8 +56,13 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => 'postmaster@sandboxfdf7d3075d964f97a2e8f2717993603c.mailgun.org',
+        'name' => 'Restaurant Excellent taste',
+    ],
+
+    'reply_to' => [
+        'address' => 'postmaster@sandboxfdf7d3075d964f97a2e8f2717993603c.mailgun.org', 
+        'name' => 'Restaurant Excellent taste',
     ],
 
     /*
@@ -87,7 +92,7 @@ return [
     'username' => env('MAIL_USERNAME'),
 
     'password' => env('MAIL_PASSWORD'),
-
+    // d1a346e0927f87fe50c982ae87d6aee3-3939b93a-b8a55b00
     /*
     |--------------------------------------------------------------------------
     | Sendmail System Path

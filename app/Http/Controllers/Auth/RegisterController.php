@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
+use App\Rules\Capcha;
+
+use App\Mail\UserAuth;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -49,9 +54,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'g-recaptcha-response' => ['required', new Capcha],
+            'customer_nr' => ['required', 'max:5'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'last_name' => ['required', 'string', 'max:64'],
+            'insertion' => ['string', 'nullable', 'max:64'],
+            'first_name' => ['required', 'string', 'max:64'],
+            'address' => ['required', 'string', 'max:64'],
+            'zipcode' => ['required', 'string', 'max:32'],
+            'town' => ['required', 'string', 'max:64'],
+            'telephone_nr' => ['required', 'digits_between:8,16', 'max:16'],
+            'email' => ['required', 'email', 'max:64', 'unique:customer,email'],
         ]);
     }
 
@@ -64,7 +77,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'town' => $data['town'],
+            'customer_nr' => $data['customer_nr'],
+            'first_name' => $data['first_name'],
+            'insertion' => $data['insertion'],
+            'last_name' => $data['last_name'],
+            'address' => $data['address'],
+            'zipcode' => $data['zipcode'],
+            'telephone_nr' => $data['telephone_nr'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

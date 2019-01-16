@@ -162,7 +162,7 @@
 						<b><a href="{{ url('/restaurant/contact') }}">CONTACT</a></b>
 					</li>
 					
-					@if (Auth::user()->rank >= 0)
+					@auth
 						<li>
 							<b>
 								<a href="#profilelinks" data-toggle="collapse" aria-expanded="false">
@@ -198,7 +198,7 @@
 					@endif
 					
 				
-					@if (Auth::guest())
+					@guest
 						<li style="top: 45vh; display: table;">
 							<b>
 								<a href="{{ route('login') }}">INLOGGEN</a>

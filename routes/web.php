@@ -11,7 +11,8 @@
 |
 */
 
-Auth::routes();
+
+Auth::routes(['verify' => true]);
 
 
 // RESTAURANT ROUTES

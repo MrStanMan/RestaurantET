@@ -18,7 +18,7 @@ class CreateCustomerTable extends Migration
             $table->primary('customer_nr');
             $table->string('password', 64);
             $table->string('last_name', 64);
-            $table->string('insertion', 64);
+            $table->string('insertion', 64)->nullable();
             $table->string('first_name', 64);
             $table->string('address', 64);
             $table->string('zipcode', 32);
