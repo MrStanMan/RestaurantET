@@ -11,10 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index');
+
+// RESTAURANT ROUTES
+Route::get('/', 'HomepageController@index');
+Route::get('/restaurant/{attribute}', 'HomepageController@getUrl');
+// END RESTAURANT ROUTES
+
+
+// PROFILE ROUTES
+Route::get('/profile/{attribute}', 'ProfileController@getUrl');
+// END PROFILE ROUTES
+
+
+// MANAGER ROUTES
+
+// END MANAGER ROUTES
