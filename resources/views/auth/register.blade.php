@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <style type="text/css">
     .col-form-label{
         padding: 0px;
@@ -147,8 +149,11 @@
 
 
 
-                        <div class="form-group row mb-0 px-4">
-                            <div class="col-md-3 col-sm-3 col-3 col-lg-3 offset-lg-9 offset-9 offset-md-9 offset-sm-9" style="text-align: right;">
+                        <div class="form-row mb-0 px-4">
+                            <div class="form-group col-md-6 col-sm-6 col-12">
+                                <div class="g-recaptcha" data-sitekey="6Ld6LYoUAAAAALa2-tgzZfkYTJ8wIQBdlzLwKssQ"></div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6 col-12" style="text-align: right;">
                                 <button type="submit" class="btn btn-success">
                                     {{ __('Registreer') }}
                                 </button>

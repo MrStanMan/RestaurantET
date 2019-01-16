@@ -18,6 +18,10 @@ class LoginController extends Controller
     |
     */
 
+    public function username(){
+        return 'customer_nr';
+    }
+
     use AuthenticatesUsers;
 
     /**

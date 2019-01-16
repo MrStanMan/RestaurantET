@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\Capcha;
 
 use App\Mail\UserAuth;
 use Mail;
@@ -53,6 +54,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'g-recaptcha-response' => ['required', new Capcha],
             'customer_nr' => ['required', 'max:5'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'last_name' => ['required', 'string', 'max:64'],
@@ -74,7 +76,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        return User::create([
             'town' => $data['town'],
             'customer_nr' => $data['customer_nr'],
             'first_name' => $data['first_name'],
@@ -86,8 +88,5 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        // dd($user);
-        Mail::to($user)->send(new UserAuth($user));
-        return $user;
     }
 }

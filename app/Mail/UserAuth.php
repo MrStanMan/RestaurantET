@@ -32,7 +32,9 @@ class UserAuth extends Mailable
     public function build()
     {
         // dd($this->user);
-        return $this->view('emails.activationMail')->with(['customer_nr' => $this->user->customer_nr,]);
+        // $this->user->customer_nr = random_int(0, 99999);
+        // $this->user->save();
+        // return $this->view('emails.activationMail')->with(['customer_nr' => $this->user->customer_nr,]);
 
     }
 }
