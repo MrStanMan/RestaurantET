@@ -15,7 +15,7 @@ Auth::routes();
 
 
 // RESTAURANT ROUTES
-Route::get('/', 'HomepageController@getUrl');
+Route::get('/', 'HomepageController@index');
 Route::get('/restaurant/{attribute}', 'HomepageController@getUrl');
 // END RESTAURANT ROUTES
 

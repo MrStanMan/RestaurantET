@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Response;
 
 class HomepageController extends Controller
 {
+	public function index()
+	{
+		return view('homepage.index');
+	}
+	
 	public function getUrl($attribute)
 	{
 		$request_items = ['homepage', 'menu', 'about', 'contact'];
