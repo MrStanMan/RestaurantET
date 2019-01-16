@@ -1,8 +1,8 @@
-@extends('layouts.menu')
+@extends('layouts.base')
 
 @section('content')
 <div class="container">
-	<img src="{{ asset('img/logo_black.png') }}" style="margin-top: 20px;">
+	
 	<h2 class="h2">Over ons</h2>
 	<div class="text">
 		Restaurant excellent taste is een gezellig restaurant met een aantal mooie gerechten.

@@ -14,8 +14,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
 
     public $primaryKey = 'customer_nr';
-    public $table = 'customer';
     public $incrementing = false;
+    public $table = 'customer';
 
     /**
      * The attributes that are mass assignable.
@@ -49,4 +49,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
     	$user = factory(User::class)->create();
  	}
+
+    public function reservation()
+    {
+        return $this->hasMany('App\Reservation', 'customer_nr', 'customer_nr');
+    }
 }

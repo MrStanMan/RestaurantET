@@ -1,7 +1,6 @@
 @extends('layouts.base')
 
 @section('content')
-
-		Index
-	
+	{{$user}}
+	{{$user->reservation}}
 @endsection

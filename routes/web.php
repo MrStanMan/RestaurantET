@@ -11,21 +11,21 @@
 |
 */
 
+use App\Product;
 
 Auth::routes(['verify' => true]);
 
 
 // RESTAURANT ROUTES
 Route::get('/', 'HomepageController@index');
-Route::get('/restaurant/{attribute}', 'HomepageController@getUrl');
-// END RESTAURANT ROUTES
 
+Route::get('profile/{user}', function (App\User $user) {
+    return view('homepage.profile', compact('user'));
+});
+Route::get('menukaart', function () {
+	$menu = Product::all();
+    return view('homepage.menu', compact('menu'));
+})->name('menukaart');
 
-// PROFILE ROUTES
-Route::get('/profile/{attribute}', 'ProfileController@getUrl');
-// END PROFILE ROUTES
-
-
-// MANAGER ROUTES
-
-// END MANAGER ROUTES
+Route::get('about', function () { return view('homepage.about'); })->name('about');
+Route::get('contact', function () { return view('homepage.contact'); })->name('contact');
