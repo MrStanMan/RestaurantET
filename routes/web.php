@@ -40,7 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('profile/password', 'AccountController@reset_password')->name('reset_password');
 	Route::post('profile/password/update/{customer_nr}', 'AccountController@password_update')->name('password_update');
-	Route::get('profile/{user}', function (App\User $user) { return view('pages.profile', compact('user')); });
+
+	Route::get('profile/{user}', 'AccountController@show_user')->name('profile_index');
 
 });
 

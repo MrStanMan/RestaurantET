@@ -27,9 +27,9 @@
 <body>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12 jumbotron" style="padding:20px 20px;">
+		<div class="col-md-12 jumbotron" >
 			<a href="{{ route('home') }}">
-				<img src="{{ asset('img/logo_black.png') }}">
+				<img src="{{ asset('img/logo_black.png') }}" id="logo">
 			</a>
 		</div>
 		<div class="col-md-2">
@@ -64,11 +64,17 @@
 		</div>
 	<!-- <div class="container"> -->
 		<div class="col-md-10 col-sm-12 col-lg-10 col-12">
-			@if (session('status'))
+			@if (session('success'))
 			    <div class="alert alert-success">
-			        {{ session('status') }}
+			        {{ session('success') }}
 			    </div>
 			@endif
+			@if ( session('error') )
+			    <div class="alert alert-danger">
+			        {{ session('error') }}
+			    </div>
+			@endif
+
 			@yield('content')
 		</div>
 	<!-- </div> -->

@@ -3,4 +3,16 @@ html body {
 	padding: 0;
 	height: 100%;
 	width: 100%;
+	/*color: #fff;*/
+	/*background-image: url('https://images.homedepot-static.com/productImages/44ad15b1-1282-4d33-b6c4-f47cdbae9b90/svn/a-street-wallpaper-2716-23870-64_1000.jpg');*/
+	/*background-position: center;*/
+	background-size: cover;
+
+}
+.jumbotron {
+	background-position: center;
+	/*background-size: cover;*/
+	background-image: url('http://www.studiomova.nl/wp-content/themes/mova/img/cuttlery.jpg');
+	/*width: 100%;*/
+	box-shadow: 0px 0px 30px 5px #111;
 }
