@@ -6,6 +6,9 @@ return [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
+        'employee' => [
+            'order' => 'c,r,u,d'
+        ],
         'user' => [
             'profile' => 'r,u,d'
         ],

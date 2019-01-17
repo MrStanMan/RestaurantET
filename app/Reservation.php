@@ -14,4 +14,9 @@ class Reservation extends Model
     {
         return $this->belongsTo('App\User', 'customer_nr', 'customer_nr');
     }
+
+    public function table()
+    {
+        return $this->hasMany('App\Table', 'table_nr', 'table_nr');
+    }
 }

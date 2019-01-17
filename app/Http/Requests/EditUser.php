@@ -26,8 +26,15 @@ class EditUser extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => ['max:64'],
-            // 'date' => ['required'],
+            // 'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'last_name' => ['string', 'max:64', 'nullable'],
+            'insertion' => ['string', 'nullable', 'max:64', 'nullable'],
+            'first_name' => ['string', 'max:64', 'nullable'],
+            'address' => ['string', 'max:64', 'nullable'],
+            'zipcode' => ['string', 'max:32', 'nullable'],
+            'town' => ['string', 'max:64', 'nullable'],
+            'telephone_nr' => ['digits_between:8,16', 'max:16', 'nullable'],
+            'email' => ['email', 'max:64'],
         ];
     }
 }

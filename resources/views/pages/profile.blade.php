@@ -7,6 +7,9 @@
 			<h3 class="card-header">Account gegevens</h3>
 		<div class="card_body p-4">
 		<p class="card-text">
+			<label>Klantnummer:</label><span style="float: right;">{{$user->customer_nr}}</span>
+		</p>
+		<p class="card-text">
 			<label>Voornaam:</label><span style="float: right;">{{$user->first_name}}</span>
 		</p>
 		<p class="card-text">
@@ -26,9 +29,10 @@
 		</p>
 		</div>
 		<div class="card-footer text-muted text-center">
-			<a href="{{ route('get_user') }}" class="btn btn-sm btn-primary">Account aanpassen</a>
-		    <input type="submit" class="btn btn-primary btn-sm" name="Edit" value="Verrander Wachtwoord">
-		    <input type="submit" class="btn btn-danger btn-sm" name="Delete" value="verwijder account">
+			<a href="{{ url('profile/edit') }}/{{ $user->customer_nr }}" class="btn btn-sm btn-primary">Account aanpassen</a>
+			@auth
+			<a href="{{ url('profile/delete') }}/{{ $user->customer_nr }}" class="btn btn-sm btn-danger">Verwijder account</a>
+			@endauth
 		  </div>
 	</div>
 	<br>
@@ -36,7 +40,11 @@
 		<div class="card_body">
 			<h2 class="card-title">Reservaties</h2>
 		<p class="card-text">
-			<label>Tijds:</label><span style="float: right;">{{$user->reservation[0]->date}}</span>
+			@if ($user->reservation == NULL)
+				geen reservaties
+			@else
+				{{$user->reservation}}
+			@endif
 		</p>
 		</div>
 	</div>

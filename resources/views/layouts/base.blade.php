@@ -64,6 +64,11 @@
 		</div>
 	<!-- <div class="container"> -->
 		<div class="col-md-10 col-sm-12 col-lg-10 col-12">
+			@if (session('status'))
+			    <div class="alert alert-success">
+			        {{ session('status') }}
+			    </div>
+			@endif
 			@yield('content')
 		</div>
 	<!-- </div> -->
