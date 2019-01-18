@@ -36,9 +36,9 @@
 		  </div>
 	</div>
 	<br>
-	<div class="card p-4">
-		<div class="card_body">
-			<h2 class="card-title">Reservaties</h2>
+	<div class="card">
+			<h3 class="card-header">Reservaties</h3>
+		<div class="card_body p-4">
 		<p class="card-text">
 			@if ($user->reservation == NULL)
 				geen reservaties
@@ -50,9 +50,9 @@
 	</div>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-	<div class="card p-4">
-		<div class="card_body">
-			<h2 class="card-title">Facturen</h2>
+	<div class="card">
+			<h3 class="card-header">Facturen</h3>
+		<div class="card_body p-4">
 		<p class="card-text">
 			Je hebt nog geen facturen
 		</p>
