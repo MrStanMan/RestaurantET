@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-<div class="container">
+<div class="container about-container">
 	
 	<h2 class="h2">Over ons</h2>
 	<div class="text">

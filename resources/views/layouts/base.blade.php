@@ -32,13 +32,13 @@
 				<img src="{{ asset('img/logo_black.png') }}" id="logo">
 			</a>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-2 navigation">
 			<nav class="nav nav-pills flex-column">
 				@guest
 					<a class="nav-item nav-link {{ (\Request::route()->getName() == 'login') ? 'active' : '' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
 					<a class="nav-item nav-link {{ (\Request::route()->getName() == 'register') ? 'active' : '' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
 				@else
-					<a class="flex-md-fill nav-item nav-link {{ (\Request::route()->getName() == 'profile' || \Request::route()->getName() == 'admin_home') ? 'active' : '' }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->first_name }} <span style="float: right;" ><i class="fas fa-chevron-down"></i></span></a>
+					<a class="flex-md-fill nav-item nav-link {{ (\Request::route()->getName() == 'profile_index' || \Request::route()->getName() == 'get_user' || \Request::route()->getName() == 'delete_account' || \Request::route()->getName() == 'admin_home') ? 'active' : '' }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->first_name }} <span style="float: right;" ><i class="fas fa-chevron-down"></i></span></a>
 					<div class="dropdown-menu">
 				      	<a class="dropdown-item" href="{{ url('profile') }}/{{ Auth::user()->customer_nr }}">Mijn account</a>
 			      	@role('administrator')
@@ -63,7 +63,7 @@
 			</nav>
 		</div>
 	<!-- <div class="container"> -->
-		<div class="col-md-10 col-sm-12 col-lg-10 col-12">
+		<div class="col-md-10 col-sm-12 col-lg-10 col-12 content">
 			@if (session('success'))
 			    <div class="alert alert-success">
 			        {{ session('success') }}

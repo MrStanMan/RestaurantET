@@ -9,11 +9,28 @@ html body {
 	background-size: cover;
 
 }
+
+body .container
+{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
 .jumbotron {
 	background-position: center;
 	/*background-size: cover;*/
 	background-image: url('http://www.studiomova.nl/wp-content/themes/mova/img/cuttlery.jpg');
 	/*width: 100%;*/
 	box-shadow: 0px 0px 30px 5px #111;
-	border-radius: 0;
+	border-radius: 0px;
+}
+
+.row .content
+{
+	border-left: 1px solid black;
+}
+
+.nav .nav-link.active
+{
+	background-color: #6e2600;
 }
