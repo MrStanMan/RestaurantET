@@ -34,3 +34,8 @@ body .container
 {
 	background-color: #6e2600;
 }
+
+.nav a.active:hover
+{
+	color: #dcdcdc;
+}
