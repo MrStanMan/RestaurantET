@@ -76,7 +76,8 @@ export default {
         }
     },
     mounted() {
-        console.log('Component mounted.')
+        console.log('Component mounted.');
+        console.log(this.product_total);
     }
 }
 </script>

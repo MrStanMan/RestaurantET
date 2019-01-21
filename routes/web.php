@@ -52,8 +52,6 @@ Route::group(['middleware' => 'role:administrator'], function() {
 });
 
 Route::group(['middleware' => 'role:employee'], function () {
-	Route::get('profile/{user}', 'AccountController@show_user')->name('profile_index');
-
 	Route::get('/bestellingen', 'OrderController@index')->name('orders_home');
 	Route::get('/bestelling/{customer_nr}', 'OrderController@view_customer_order')->name('view_customer_order');
 

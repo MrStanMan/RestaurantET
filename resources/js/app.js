@@ -23,6 +23,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('reservation-form', require('./components/ReservationForm.vue').default);
 Vue.component('order', require('./components/Order.vue').default);
+Vue.component('customer-order', require('./components/customerOrder.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,9 +31,13 @@ Vue.component('order', require('./components/Order.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const reservation = new Vue({
-	el: '#resFrom'
-});
+// const reservation = new Vue({
+// 	el: '#resFrom'
+// });
+
 const order = new Vue({
-	el: "#order"
+    el: "#order",
+});
+const customerOrder = new Vue({
+    el: "#customer-order",
 });

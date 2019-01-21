@@ -20,6 +20,7 @@ class AccountController extends Controller
 	public function show_user($customer_nr)
 	{
 		$user = User::find($customer_nr);
+        // dd(Auth::id());
 		if ($customer_nr == Auth::id()){
 			return view('pages.profile', compact('user'));
 		} else {
@@ -54,18 +55,27 @@ class AccountController extends Controller
     	}
     	$user->email = $request->email;
     	$user->save();
-    	return redirect()->back()->with('success', 'Gegevens geupdate');
+    	return redirect()->back()->with('success', 'Gegevens geüpdate');
     }
     public function password_update(Request $request, $customer_nr)
     {
     	$user = User::find($customer_nr);
-    	if(Hash::check($request->password, $user->password)){
-	    	$user->password = Hash::make($request->new_password);
-    		$user->save();
-    	} else {
-    		dd($request);
-    	}
-    	return redirect()->back()->with('success', 'wachtwoord geupdate');
+
+        $validator = Validator::make($request->all(), [
+            'new_password' => ['required'],
+            'password' => ['required', 'required_with:password_confirmation','same:password_confirmation'],
+            'password_confirmation' => ['required'],
+        ]);
+            dd($validator);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+            
+        } elseif ($validator->fails() == true) {
+            dd($user);
+            $user->save();
+            return redirect()->back()->with('success', 'Wachtwoord gewijzigd');
+        }
+    	
     }
     public function delete_account(Request $request, $customer_nr )
     {

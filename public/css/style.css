@@ -68,18 +68,3 @@ body .container
 	background-color: #f0f;
 	border-radius: 0px;
 }
-
-.row .content
-{
-	border-left: 1px solid black;
-}
-
-.nav .nav-link.active
-{
-	background-color: #6e2600;
-}
-
-.nav a.active:hover
-{
-	color: #dcdcdc;
-}
