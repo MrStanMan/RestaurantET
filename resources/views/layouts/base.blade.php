@@ -32,13 +32,13 @@
 				<img src="{{ asset('img/logo_black.png') }}" id="logo">
 			</a>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-2 navigation">
 			<nav class="nav nav-pills flex-column">
 				@guest
 					<a class="nav-item nav-link {{ (\Request::route()->getName() == 'login') ? 'active' : '' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
-					<a class="nav-item nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+					<a class="nav-item nav-link {{ (\Request::route()->getName() == 'register') ? 'active' : '' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
 				@else
-					<a class="flex-md-fill nav-item nav-link active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->first_name }} <span style="float: right;" ><i class="fas fa-chevron-down"></i></span></a>
+					<a class="flex-md-fill nav-item nav-link {{ (\Request::route()->getName() == 'profile_index' || \Request::route()->getName() == 'get_user' || \Request::route()->getName() == 'delete_account' || \Request::route()->getName() == 'admin_home') ? 'active' : '' }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->first_name }} <span style="float: right;" ><i class="fas fa-chevron-down"></i></span></a>
 					<div class="dropdown-menu">
 				      	<a class="dropdown-item" href="{{ url('profile') }}/{{ Auth::user()->customer_nr }}">Mijn account</a>
 			      	@role('administrator')
@@ -85,6 +85,7 @@
 	</div>
 </div>
 </body>
+<<<<<<< HEAD
 <script type="text/javascript" src="/js/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -96,3 +97,7 @@
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
 </html>
+=======
+<script src="{{ asset('js/app.js') }}"></script>
+</html>
+>>>>>>> 3d24b8ad76bc5a4e3504e80376592bffd1ea8090
