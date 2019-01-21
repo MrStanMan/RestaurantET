@@ -4,13 +4,16 @@ return [
     'role_structure' => [
         'administrator' => [
             'users' => 'c,r,u,d',
-            'profile' => 'r,u'
+            'profile' => 'r,u',
+            'reservation' => 'c,r,u,d'
         ],
         'employee' => [
-            'order' => 'c,r,u,d'
+            'order' => 'c,r,u,d',
+            'reservation' => 'r,u'
         ],
         'user' => [
-            'profile' => 'r,u,d'
+            'profile' => 'r,u,d',
+            'reservation' => 'c,r,d'
         ],
     ],
     'permission_structure' => [

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class MakeReservation extends FormRequest
 {
@@ -13,7 +14,7 @@ class MakeReservation extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::user()->hasRole('user') || Auth::user()->hasRole('administrator');
     }
 
     /**
@@ -24,8 +25,11 @@ class MakeReservation extends FormRequest
     public function rules()
     {
         return [
-            'total_guests' => ['required','digits_between:1,8'],
+            // 'customer_nr' => ['required'],
+            'time_in' => ['required'],
+            'total_guests' => ['required','max:1'],
             'date' => ['required'],
+            'table_nr' => ['required'],
         ];
     }
 
@@ -37,7 +41,7 @@ class MakeReservation extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'maxiam',
+            'max' => 'maxiam',
             'body.required'  => 'A message is required',
         ];
     }

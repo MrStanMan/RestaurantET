@@ -29,8 +29,9 @@ Route::get('about', function () { return view('pages.about'); })->name('about');
 Route::get('contact', function () { return view('pages.contact'); })->name('contact');
 
 Route::group(['middleware' => 'auth'], function () { 
-	Route::get('reserveer', function () { return view('pages.reservation'); })->name('reserveer');
+	// Route::get('reserveer', function () { return view('pages.reservation'); })->name('reserveer');
 	Route::post('reserveer', 'ReservationController@reservate');
+	Route::get('reserveer', 'ReservationController@index')->name('reserveer_index');
 
 	Route::get('profile/edit/{customer_nr}', 'AccountController@get_user')->name('get_user');
 	Route::post('profile/edit/{customer_nr}', 'AccountController@edit_user')->name('edit_user');
@@ -45,7 +46,16 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-Route::group(['prefix' => 'administrator', 'middleware' => ['role:administrator']], function() {
+Route::group(['middleware' => 'role:administrator'], function() {
     Route::get('/admin', 'AdminController@welcome')->name('admin_home');
     Route::get('/admin/users', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
+});
+
+Route::group(['middleware' => 'role:employee'], function () {
+	Route::get('profile/{user}', 'AccountController@show_user')->name('profile_index');
+
+	Route::get('/bestellingen', 'OrderController@index')->name('orders_home');
+	Route::get('/bestelling/{customer_nr}', 'OrderController@view_customer_order')->name('view_customer_order');
+
+	Route::post('/bestellingen/new', 'OrderController@new_order');
 });

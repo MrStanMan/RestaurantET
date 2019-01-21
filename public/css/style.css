@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Charm|Comfortaa:400');
+
 html body {
+	font-family: 'Comfortaa', cursive;
 	margin: 0;
 	padding: 0;
 	height: 100%;
@@ -14,5 +17,45 @@ html body {
 	/*background-size: cover;*/
 	background-image: url('http://www.studiomova.nl/wp-content/themes/mova/img/cuttlery.jpg');
 	/*width: 100%;*/
-	box-shadow: 0px 0px 30px 5px #111;
+	/*box-shadow: 0px 0px 30px 5px #111;*/
+	border-radius: 0px;
+}
+.menu {
+	font-family: 'Charm';
+	font-size: 20px;
+}
+.hr {
+	margin-bottom: 20px;
+	height: 70px;
+	width: 100%;
+	text-align: center;
+	background-image: url('http://pluspng.com/img-png/png-divider-lines-elegant-flourish-floral-decorative-680.png');
+	/*background-size: ;*/
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.layout {
+	/*width: 100%;*/
+	/*height: 700px;*/
+	/*border: 1px solid black;*/
+}
+.layout > .table {
+	background-image: url('https://www.feydarchewsticks.com/media/dining-table-top-view-dining-table-top-view-png-wwwpixsharkcom-images_d_19-23.png');
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	justify-content: center;
+	/*position: relative;*/
+	height: 200px;
+	/*width: 150px;*/
+	/*border: 1px solid black;*/
+}
+.layout > .table:hover {
+	cursor: pointer;
+}
+.unavailable {
+	background-color: #0ff;
+}
+.available {
+	background-color: #f0f;
 }

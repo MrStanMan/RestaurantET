@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Role;
+use App\Reservation;
 use Hash;
 use Validator;
 use App\Rules\Capcha;
@@ -20,7 +21,7 @@ class AccountController extends Controller
 	{
 		$user = User::find($customer_nr);
 		if ($customer_nr == Auth::id()){
-	    	return view('pages.profile', compact('user'));
+			return view('pages.profile', compact('user'));
 		} else {
 			return redirect()->back()->with('error', 'Je kunt deze gebruiker niet bekijke!');
 		}
@@ -28,7 +29,6 @@ class AccountController extends Controller
 	public function get_user($customer_nr)
 	{
 		$user = User::find($customer_nr);
-		// dd(Auth::user()->can('update-users'));
 		if (Auth::user()->can('update-users') == true) {
 			return view('account.edit', compact('user'));
 		}
@@ -41,7 +41,6 @@ class AccountController extends Controller
     public function edit_user(EditUser $request, $customer_nr)
     {
     	$user = User::find($customer_nr);
-    	// dd($user);
     	$user->first_name = $request->first_name;
     	$user->insertion = $request->insertion;
     	$user->last_name = $request->last_name;
@@ -67,14 +66,11 @@ class AccountController extends Controller
     		dd($request);
     	}
     	return redirect()->back()->with('success', 'wachtwoord geupdate');
-    	// dd($request->password);
     }
     public function delete_account(Request $request, $customer_nr )
     {
     	$user = User::find($customer_nr);
     	if ($request->isMethod('POST')) {
-    		// $user = User::find($customer_nr);
-	    	// if(Hash::check($request->password, $user->password)){
     		if (Auth::user()->can('delete-users')) {
     			$user->delete();
 		    	return redirect()->route('admin_home')->with('success', 'Account verwijderd');
@@ -87,19 +83,12 @@ class AccountController extends Controller
 		        if ($validator->fails()) {
 		            return redirect()->back()->withErrors($validator);
 		        } elseif ($validator->fails() == true) {
-			        // dd($user);
 		        	$user->delete();
 		        	return redirect()->route('login')->with('success', 'account verwijderd');
 		        }
-		        // dd($validator->fails());
 		    }
-	    		// $user->delete();
-		    	// return redirect()->route('home');
-	    	// }
-		    	// return redirect()->route('contact');
 		    
     	} else {
-    		// $user = Auth::user();
     		return view('account.delete', compact('user'));
     	}
     }
