@@ -4,7 +4,7 @@
     <div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
         <div class="card">
             <div class="card-header">
-                <h2>bestellingen van tafel  </h2>
+                <h2>bestellingen van tafel {{ reservation.table_nr }}</h2>
             </div>
             <div class="card-body p-0">
                 <table class="table">
@@ -19,7 +19,7 @@
                         <tr v-for="order in product_ordered">
                             <td>{{ order.product[0].product_description }}</td>
                             <td>{{ order.total }}X</td>
-                            <td>&#8364; {{ order.product[0].price }}</td>
+                            <td>&#8364; {{ order.product[0].price * order.total }}.00</td>
                         </tr>
                         <tr>
                             <td colspan="2">totaal prijs</td>
@@ -127,7 +127,7 @@ export default {
                             price: parseInt(this.product_ordered[i].product[0].price),
                             total: parseInt(this.product_ordered[i].total),
                         });
-                        this.price_total.reduce((sum, item) => sum + item.price,0);
+                        // this.price_total.reduce((sum, item) => sum + item.price,0);
                     }
                         console.log(this.price_total);
                 });
@@ -152,7 +152,7 @@ export default {
     computed: {
         total () {
             return this.price_total.reduce( (total, item) => {
-                return total = item.total * item.price;
+                return total += (item.total * item.price);
             }, 0);
         }
     }

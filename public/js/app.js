@@ -1925,11 +1925,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.price_total.push({
             price: parseInt(_this.product_ordered[i].product[0].price),
             total: parseInt(_this.product_ordered[i].total)
-          });
+          }); // this.price_total.reduce((sum, item) => sum + item.price,0);
 
-          _this.price_total.reduce(function (sum, item) {
-            return sum + item.price;
-          }, 0);
         }
 
         console.log(_this.price_total);
@@ -1956,7 +1953,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     total: function total() {
       return this.price_total.reduce(function (total, item) {
-        return total = item.total * item.price;
+        return total += item.total * item.price;
       }, 0);
     }
   }
@@ -36992,11 +36989,15 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-md-6 col-lg-6 col-12 col-sm-12 mb-2" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h2", [
+            _vm._v("bestellingen van tafel " + _vm._s(_vm.reservation.table_nr))
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body p-0" }, [
           _c("table", { staticClass: "table" }, [
-            _vm._m(1),
+            _vm._m(0),
             _vm._v(" "),
             _c(
               "tbody",
@@ -37009,7 +37010,13 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(order.total) + "X")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("€ " + _vm._s(order.product[0].price))])
+                    _c("td", [
+                      _vm._v(
+                        "€ " +
+                          _vm._s(order.product[0].price * order.total) +
+                          ".00"
+                      )
+                    ])
                   ])
                 }),
                 _vm._v(" "),
@@ -37030,7 +37037,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "col-md-6 col-lg-6 col-12 col-sm-12 mb-2" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(2),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "card-body p-0" }, [
           _c("div", { staticClass: "card-body" }, [
@@ -37067,7 +37074,7 @@ var render = function() {
                 }
               },
               [
-                _vm._m(3),
+                _vm._m(2),
                 _vm._v(" "),
                 _vm._l(_vm.product, function(order) {
                   return _c("div", { staticClass: "form-row py-2" }, [
@@ -37123,7 +37130,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("table", { staticClass: "table table-striped" }, [
-            _vm._m(4),
+            _vm._m(3),
             _vm._v(" "),
             _c(
               "tbody",
@@ -37155,14 +37162,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h2", [_vm._v("bestellingen van tafel  ")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
