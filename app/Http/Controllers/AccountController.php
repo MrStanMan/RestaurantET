@@ -57,6 +57,20 @@ class AccountController extends Controller
     	$user->save();
     	return redirect()->back()->with('success', 'Gegevens geüpdate');
     }
+		public function block_user($customer_nr){
+			$user = User::find($customer_nr);
+			if ($user->status == '1') {
+				$user->status = '0';
+				$user->save();
+				return redirect()->back()->with('success', 'Account geblokkeerd');
+			} else {
+				$user->status = '1';
+				$user->save();
+				return redirect()->back()->with('success', 'Account gedeblokkeerd');
+			}
+
+			// $user->status = '0';
+		}
     public function password_update(Request $request, $customer_nr)
     {
     	$user = User::find($customer_nr);
@@ -97,7 +111,7 @@ class AccountController extends Controller
 		        	return redirect()->route('login')->with('success', 'account verwijderd');
 		        }
 		    }
-		    
+
     	} else {
     		return view('account.delete', compact('user'));
     	}
