@@ -21,7 +21,6 @@ class Orders extends Migration
             $table->string('product_nr', 64);
             $table->string('total_ordered', 64);
             $table->time('time');
-            $table->primary(['device', 'timestamp']);
             $table->foreign('reservation_nr')->references('reservation_nr')->on('reservation');
             $table->foreign('table_nr')->references('table_nr')->on('tables');
             $table->foreign('product_nr')->references('product_nr')->on('products');

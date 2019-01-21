@@ -13,7 +13,7 @@ class Order extends Model
 
     public function product()
     {
-        return $this->hasOne('App\Product', 'product_nr', 'product_nr');
+        return $this->hasMany('App\Product', 'product_nr', 'product_nr');
     }
 
     public function table()

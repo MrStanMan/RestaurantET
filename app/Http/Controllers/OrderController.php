@@ -33,36 +33,41 @@ class OrderController extends Controller
     	$products = Product::all();
     	return view('orders.customerOrder', compact('reservation', 'products'));
     }
+
+    public function view_customer_order_json($reservation_nr)
+    {
+        $orders = Order::where('reservation_nr', $reservation_nr)->get();
+        foreach ($orders as $order) {
+            $product_ordered[] = [
+                'product' => Product::where('product_nr', $order->product_nr)->get(),
+                'total' => $order->total_ordered
+            ];
+        }
+        return response([
+            'product_ordered' => $product_ordered
+        ], 200);
+    }
     public function new_order(Request $request)
     {
-    	// dd($request);
-    	// Order::create([
-    	// 	'device' => 1,
-    	// 	'timestamp' => Carbon::now()->toDateTimeString(),
-    	// ]);
-    	foreach ($request->all() as $orders) {
-	    	for ($i=0; $i < count($request->all()); $i++) { 
-		    	$order = Order::updateOrCreate(
-		    		['reservation_nr' => $orders[$i]['reservation_nr'],
-		    		'table_nr' => $orders[$i]['table_nr'],
-		    		'product_nr' => $orders[$i]['product_nr'],
-		    		'total_ordered' => $i],
-		    		['device' => 1,
-		    		'timestamp' => Carbon::now()->toDateTimeString(),
-		    		'reservation_nr' => $orders[$i]['reservation_nr'],
-		    		'table_nr' => $orders[$i]['table_nr'],
-		    		'product_nr' => $orders[$i]['product_nr'],
-		    		'total_ordered' => $orders[$i]['total'],
-		    		'time' => Carbon::now()->toTimeString()]
-		    	);
-		    	dd($order);
-	    	}
-    	}
-
-    	return response()->json([
-           'order'    => $order,
-           'message' => 'Success'
-        ], 200);
-    	// dd($request);
+        if ($request->product == []) {
+            return response([
+                'message' => 'Niks besteld'
+            ], 422);
+        } else {
+            foreach ($request->product as $orders) {
+    	    	$order = Order::create(
+    	    		['device' => 1,
+    	    		'timestamp' => Carbon::now()->toDateTimeString(),
+    	    		'reservation_nr' => $orders['reservation_nr'],
+    	    		'table_nr' => $orders['table_nr'],
+    	    		'product_nr' => $orders['product_nr'],
+    	    		'total_ordered' => $orders['total'],
+    	    		'time' => Carbon::now()->toTimeString()]
+    	    	);
+            }
+        	return response([
+                'message' => 'Succesvol besteld'
+            ], 200);
+        }
     }
 }

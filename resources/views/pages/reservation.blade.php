@@ -25,7 +25,6 @@
         </div>
 		<div class="form-group col-md-4 col-sm-12 col-12 ">
 			<label for="time_in">Aankomst tijd</label>
-				{{$reservations[0]->time_in}}
 			<select class="custom-select" name="time_in" size="{{ count($times) }}">
 			  	@foreach ( $times as $time)
 				  	@foreach ( $reservations as $res)
