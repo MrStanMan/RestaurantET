@@ -28,13 +28,16 @@ Route::get('menukaart', function () {
 Route::get('about', function () { return view('pages.about'); })->name('about');
 Route::get('contact', function () { return view('pages.contact'); })->name('contact');
 
-Route::group(['middleware' => 'auth'], function () { 
+Route::group(['middleware' => ['auth', 'cstatus']], function () {
 	Route::get('reserveer', function () { return view('pages.reservation'); })->name('reserveer');
 	Route::post('reserveer', 'ReservationController@reservate');
 
 	Route::get('profile/edit/{customer_nr}', 'AccountController@get_user')->name('get_user');
 	Route::post('profile/edit/{customer_nr}', 'AccountController@edit_user')->name('edit_user');
-	
+
+	Route::get('profile/block/{customer_nr}', 'AccountController@block_user')->name('block_user');
+	Route::post('profile/block/{customer_nr}', 'AccountController@block_user')->name('block_user');
+
 	Route::get('profile/delete/{customer_nr}', 'AccountController@delete_account')->name('delete_account');
 	Route::post('profile/delete/{customer_nr}', 'AccountController@delete_account')->name('delete_account');
 
