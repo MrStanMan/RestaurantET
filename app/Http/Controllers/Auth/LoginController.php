@@ -52,10 +52,10 @@ class LoginController extends Controller
 
     $credentials = $request->only('customer_nr', 'password');
     // Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1])
-    if (Auth::attempt(['customer_nr' => $request->customer_nr, 'password' => $request->password, 'status' => 1])) {
+    if (Auth::attempt(['customer_nr' => $request->customer_nr, 'password' => $request->password, 'status' => 0])) {
       // Authentication passed...
       return redirect()->route('home');
-    } elseif(Auth::attempt(['customer_nr' => $request->customer_nr, 'password' => $request->password, 'status' => 0])) {
+    } elseif(Auth::attempt(['customer_nr' => $request->customer_nr, 'password' => $request->password, 'status' => 1])) {
       return redirect()->back()->with('error', 'Uw account is niet verifieerd of is geblokkeerd. Neem contact op met de administrator.');
     }
     else{
@@ -70,7 +70,7 @@ class LoginController extends Controller
 
   public function logout(Request $request) {
     Auth::logout();
-    return redirect('/home');
+    return redirect('/');
   }
 
   public function showLoginForm()

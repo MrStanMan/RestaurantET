@@ -27,7 +27,7 @@ class CreateCustomerTable extends Migration
             $table->string('email', 64)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
-            $table->integer('status')->default('1');
+            $table->boolean('status')->default('0');
             $table->timestamps();
         });
     }
