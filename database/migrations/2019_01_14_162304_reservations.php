@@ -17,6 +17,7 @@ class Reservations extends Migration
             $table->string('reservation_nr', 64);
             $table->string('customer_nr', 64);
             $table->primary('reservation_nr');
+            $table->string('table_nr', 16);
             $table->foreign('customer_nr')->references('customer_nr')->on('customer');
             $table->time('time_in');
             $table->time('time_out');

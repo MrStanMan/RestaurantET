@@ -19,4 +19,9 @@ class Reservation extends Model
     {
         return $this->hasMany('App\Table', 'table_nr', 'table_nr');
     }
+
+    public function order()
+    {
+        return $this->hasMany('App\Order', 'reservation_nr', 'reservation_nr');
+    }
 }

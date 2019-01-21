@@ -36,16 +36,29 @@
 		  </div>
 	</div>
 	<br>
-	<div class="card">
-			<h3 class="card-header">Reservaties</h3>
-		<div class="card_body p-4">
-		<p class="card-text">
-			@if ($user->reservation == NULL)
+	<div class="card p-4">
+			<h2 class="card-title">Reservaties</h2>
+		<div class="card_body">
+			@if ($user->reservation == [])
+			<p class="card-text">
 				geen reservaties
+			</p>
 			@else
-				{{$user->reservation}}
+			<table class="table"> 
+				<tr>
+					<th>Datum</th>
+					<th>tijd</th>
+					<th>Tafelnummer</th>
+				</tr>
+				@foreach ($user->reservation as $reservation)
+					<tr>
+						<td>{{$reservation->date}}</td>
+						<td>{{$reservation->time_in	}}</td>
+						<td>{{$reservation->table[0]->table_nr }}</td>
+					</tr>
+				@endforeach
+			</table>
 			@endif
-		</p>
 		</div>
 	</div>
 </div>
