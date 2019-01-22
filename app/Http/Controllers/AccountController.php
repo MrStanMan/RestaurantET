@@ -9,6 +9,7 @@ use App\Role;
 use App\Reservation;
 use Hash;
 use Validator;
+use Carbon\Carbon;
 use App\Rules\Capcha;
 
 use App\Http\Requests\EditUser;
@@ -20,11 +21,12 @@ class AccountController extends Controller
 	public function show_user($customer_nr)
 	{
 		$user = User::find($customer_nr);
-        // dd(Auth::id());
 		if ($customer_nr == Auth::id()){
-			return view('pages.profile', compact('user'));
+            $today = new Carbon();
+            $today = $today->toDateString();
+			return view('pages.profile', compact('user', 'today'));
 		} else {
-			return redirect()->back()->with('error', 'Je kunt deze gebruiker niet bekijke!');
+			return redirect()->back()->with('error', 'Je kunt deze gebruiker niet bekijken!');
 		}
 	}
 	public function get_user($customer_nr)
@@ -78,12 +80,13 @@ class AccountController extends Controller
             'password' => ['required', 'required_with:password_confirmation','same:password_confirmation'],
             'password_confirmation' => ['required'],
         ]);
-            dd($validator);
+            // dd($validator);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
             
-        } elseif ($validator->fails() == true) {
-            dd($user);
+        } elseif ($validator->fails() == false) {
+            // dd($user);
+            $user->password = has::make($request->new_password);
             $user->save();
             return redirect()->back()->with('success', 'Wachtwoord gewijzigd');
         }

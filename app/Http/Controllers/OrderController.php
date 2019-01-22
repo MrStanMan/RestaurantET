@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Order;
 use App\Reservation;
 use App\Table;
+use App\User;
 use App\Product;
 use Carbon\Carbon;
 
@@ -32,6 +34,19 @@ class OrderController extends Controller
     	// dd($reservation->order);
     	$products = Product::all();
     	return view('orders.customerOrder', compact('reservation', 'products'));
+    }
+
+    public function view_customer_order_user($user, $reservation_nr)
+    {
+        if(User::Check($user) != false){
+            $user = User::find($user)->get()->first();
+            $reservation = Reservation::where('reservation_nr', $reservation_nr)->get()->first();
+            $products = Product::all();
+
+            return view('account.order', compact('user','reservation', 'products'));
+        } else {
+            return redirect()->back()->with('error', 'Je kunt deze bestelling niet bekijken!');
+        }
     }
 
     public function view_customer_order_json($reservation_nr)

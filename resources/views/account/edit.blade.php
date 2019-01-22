@@ -111,7 +111,9 @@
                 @endif
             </div>
         </div>
-		<input type="submit" name="submit" value="Aanpassen" class="btn btn-success">
+        <div class="col-12">
+    		<input type="submit" name="submit" value="Aanpassen" class="btn btn-success">
+        </div>
 	</form>
 	</div>
 </div>
@@ -123,10 +125,10 @@
         @csrf
 
         <div class="form-group row">
-            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Oud wachtwoord') }}</label>
 
             <div class="col-md-6">
-                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password">
 
                 @if ($errors->has('password'))
                     <span class="invalid-feedback" role="alert">
@@ -137,18 +139,18 @@
         </div>
 
         <div class="form-group row">
-            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Bevestig wachtwoord') }}</label>
 
             <div class="col-md-6">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="new_password" class="col-md-4 col-form-label text-md-right">{{ __('New password') }}</label>
+            <label for="new_password" class="col-md-4 col-form-label text-md-right">{{ __('Nieuw wachtwoord') }}</label>
 
             <div class="col-md-6">
-                <input id="new_password" type="password" class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" name="new_password" required>
+                <input id="new_password" type="password" class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" name="new_password">
 
                 @if ($errors->has('new_password'))
                     <span class="invalid-feedback" role="alert">
@@ -160,8 +162,8 @@
 
         <div class="form-group row mb-0">
             <div class="col-md-6 offset-md-4">
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Reset Password') }}
+                <button type="submit" class="btn btn-success">
+                    {{ __('verrander wachtwoord') }}
                 </button>
             </div>
         </div>

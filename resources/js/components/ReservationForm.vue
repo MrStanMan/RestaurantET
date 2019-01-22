@@ -1,98 +1,82 @@
 <template>
-	<form method="POST" action="reserveer" @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
-		<div class="form-group">
-			<label for="name">Name</label>
-			<input type="text" class="form-control" name="name" id="name" v-model="name"/>
-			<span class="help is-danger" v-if="errors.has('name')" v-text="errors.get('name')"></span>
-		</div>
-  
-		<div class="form-group">
-			<label for="email">E-mail</label>
-			<input type="email" class="form-control" name="email" id="email" v-model="email"/>
-			<span class="help is-danger" v-if="errors.has('email')" v-text="errors.get('email')"></span>
-		</div>
 
-		<button type="submit" class="btn btn-primary" :disabled="errors.any()">Send message</button>
-	</form>
+<form action="/reserveer" method="POST" @submit.prevent="onSubmit">
+	<div class="alert alert-primary" role="alert" v-if="message != ''" v-model="message">
+		{{ message }}
+	</div>
+	<div class="form-row col-12">
+    	<div class="form-group col-md-4 col-sm-12 col-12 ">
+    		<label for="customer_nr">Klantnummer</label>
+            <input type="text" name="customer_nr" class="form-control"  :value="customer_nr" disabled="">
+            <br>
+    		<label for="date">Datum en tijd</label><br>
+            <date-picker filter="moment" v-model="reservation_date" lang="en" type="datetime" value-type="format" format="YYYY-MM-DD HH:mm:ss" :time-picker-options="{ start: '10:00', step: '01:00', end: '22:00' }" confirms :not-before="new Date()"></date-picker>
+            <br>
+			<label for="total_guests">Aantal personen</label>
+			<input type="number" class="form-control" name="total_guests" v-model="total_guests" max="8" min="0">
+        </div>		
+		<div class="form-group col-md-4 col-sm-12 col-12 ">
+			<label for="table_nr">Selecteer uw tafel</label>
+			<select class="custom-select" size="10" v-model="selected_table" style="overflow:hidden;">
+				<option v-for="table in tables">{{ table.table_nr }}</option>
+			</select>
+		</div>
+		<div class="col-12 align-items-end">
+			<input type="submit" name="submit" value="Reserveer" class="btn btn-primary">
+		</div>
+    </div>
+    
+</form>
 </template>
 <script>
-
-class Errors{
-	constructor() {
-		this.errors = {};
-	}
-
-	get(field) {
-		if (this.errors[field]) {
-			return this.errors[field][0];
-		}
-	}
-
-	has(field) {
-		return this.errors.hasOwnProperty(field);
-	}
-
-	any() {
-		return Object.keys(this.errors).length > 0;
-	}
-
-	record(errors) {
-		this.errors = errors;
-	}
-
-	clear(field) {
-		delete this.errors[field];
-	}
-	/**
-     * Fetch all relevant data for the form.
-     */
-    data() {
-        let data = {};
-
-        for (let property in this.originalData) {
-            data[property] = this[property];
-        }
-
-        return data;
-    }
-
-	resetForm(data) {
-		for (let field in this.originalData) {
-            this[field] = '';
-        }
-
-        this.errors.clear();
-	}
-}
+import DatePicker from 'vue2-datepicker';
+import moment from 'vue-moment';
 
 export default {
-  	props: ['reservations'],
+	components: { DatePicker, moment },
+  	props: ['reservations', 'tables', 'user'],
   	data: () => {
 		return {
-			name: '',
-			email: '',
-	  		errors: new Errors(),
-		};
+			reservation_date: new Date(),
+			selected_time: '',
+			total_guests: '',
+			selected_table: '',
+			customer_nr: '',
+			reservation: {
+				reservation_nr: '',
+				total_guests: '',
+				table_nr: '',
+				customer_nr: '',
+			},
+			message: '',
+		}
 	},
   	methods: {
-		onSubmit() {
+  		onSubmit() {
+  			// console.log(this.user);
+  			this.reservation = Object.assign({}, this.reservation, {
+  				reservation_nr: this.reservation_date + ' ' + this.selected_time,
+  				time_in: this.selected_time,
+  				date: this.reservation_date,
+  				total_guests: parseInt(this.total_guests),
+  				table_nr: parseInt(this.selected_table),
+  				customer_nr: parseInt(this.customer_nr),
+  			});
 			axios.post('/reserveer', {
-				name: this.name,
-				email: this.email
-			})
-			.then((response) => {
-				this.error.resetForm({ 
-					name: this.name, 
-					email:this.email
-				});
+				reservation: this.reservation,
+			}).then((response) => {
 				console.log(response);
-			})
-			.catch((error) => {
+				this.message = response.data.message;
+			}).catch((error) => {
 				console.log(error);
-				this.errors.record(error.response.data.errors);
-			});
-		}
-  	}
+				this.message = error.response.data.message;
+			})
+  		}
+  	},
+  	mounted: function () {
+  		this.customer_nr = this.user.customer_nr;
+  		// console.log(new Date().format('Y-mm-dd'));
+  	},
 }
 
 </script>

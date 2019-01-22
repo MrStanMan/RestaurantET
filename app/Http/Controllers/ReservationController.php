@@ -19,51 +19,90 @@ class ReservationController extends Controller
 	{
 		$tables = Table::all();
 		$reservations = Reservation::all();
-        $admin = DB::table('role_user')->where('role_id', '1')->get()->first();
-        $admin = User::find($admin->user_id);
-        // dd($admin);
-		return view('pages.reservation', compact('tables', 'reservations', 'admin'));
+		$user = Auth::user();
+		$today = Carbon::now()->toDateString();
+		// dd($today);
+		return view('pages.reservation', compact('tables', 'reservations', 'user', 'today'));
 	}
-    public function reservate(Request $request)
-    {
-    	$this->validate(request(), [
-            'name' => 'required',
-            'email' => 'required',
-        ]);
+	public function reservate(Request $request)
+	{
+		// get reservation from vue object
+		$reservation = $request->get('reservation');
 
-        // return ['message' => 'gereverveerd'];
-        return response()->json([
-           'task'    => $task,
-           'message' => 'Success'
-        ], 200);
-    	// if ($request->total_guests > 8) {
-    	// 	return redirect()->back()->with('error', 'u kunt maximaal 8 gasten meenemen');
-    	// }
-    	// $validator = Validator::make($request->all(), [
-     //        'total_guests' => ['required', 'integer'],
-     //        'time_in' => ['required', 'required_with:password_confirmed','same:password_confirmed'],
-     //        'password_confirmed' => ['required'],
-     //    ]);
-     //    if ($validator->fails()) {
-     //        return redirect()->back()->withErrors($validator);
-     //    } elseif ($validator->fails() == true) {
-     //    	$user->delete();
-     //    	return redirect()->route('login')->with('success', 'account verwijderd');
-     //    }
+		// creating the correct dates
+		$date_time = explode(' ', $reservation['reservation_nr']);
+		$time_in = Carbon::createFromFormat('H:m:s',$date_time[1]);
+		$reservation_date = new Carbon($date_time[0]);
+		$reservation_date = $reservation_date->toDateString();
 
-    	// $rd = explode('/', $request->date);
-    	// $rd = Carbon::createFromDate($rd[2], $rd[0], $rd[1]);
-    	// $date = new Carbon($request->date . $request->time_in . ':00');
-    	// $res = new Reservation;
-    	// $res->customer_nr = Auth::id();
-    	// $res->reservation_nr = $date->toDateTimeString();
-    	// $res->total_guests = $request->total_guests;
-    	// $res->time_in = $date->toTimeString();
-    	// $res->time_out = $date->addHour(1)->toTimeString();
-    	// $res->date = $rd;
-    	// $res->table_nr = $request->table_nr;
-    	// $res->save();
+		// checking if the values are filled in
+		$validator = Validator::make($reservation, [
+			'table_nr' => 'required',
+			'total_guests' => 'required',
+			'reservation_nr' => 'required',
+			'customer_nr' => 'required',
+		]);
 
-    	return redirect()->back()->with('success', 'Gereserveerd voor '.$date.' voor '.$request->total_guests.' personen.');
-    }
+		// if they aren't return
+		if ($validator->fails() === true) {
+			return response()->json([
+				'message' => 'Niet alle velden zijn ingevuld'
+			], 422);
+		} else {
+			// retreve all the reservations
+			$all_reservations = Reservation::all();
+
+			// see if the user is a employee if yes give it the admin customer number
+			$user = User::find($reservation['customer_nr']);
+			if ($user->hasRole('employee')) {
+				$admin = DB::table('role_user')->where('role_id', '1')->get()->first();
+				$admin = User::find($admin->user_id);
+				$reservation['customer_nr'] = $admin->customer_nr;
+			} 
+
+			// if this return true there are no current similar reservations 
+			$available = Reservation::where('reservation_nr', $reservation['reservation_nr'])->get();
+			
+			// loop trough all the exsisting reservations and validate 
+			foreach ($all_reservations as $a_reservation) {
+
+				// check if the user already has a reservation for that day
+				if ($reservation['customer_nr'] == $a_reservation->customer_nr && $reservation_date === $a_reservation->date) {
+					return response()->json([
+						'message' => 'u heeft al een reservatie voor '.$reservation_date
+					], 500);
+				}
+				// check if there is no reservation at that time
+				if ($reservation['reservation_nr'] === $a_reservation->reservation_nr) {
+					return response()->json([
+						'message' => 'er is al een reservatie op dit tijd stip.'
+					], 500);
+				} 
+				// check if the table is not occupied
+				if ($reservation['time_in'] == $a_reservation->time_out && $reservation_date === $a_reservation->date) {
+					return true;
+				}
+				if ($reservation['table_nr'] == (int)$a_reservation->table_nr) {
+					return response()->json([
+						'message' => 'De tafel die u heeft gekozen is al bezet'
+					], 400);
+				}
+			}
+			// create the the new reservation
+			$res = new Reservation;
+			$res->customer_nr = $reservation['customer_nr'];
+			$res->reservation_nr = $reservation['reservation_nr'];
+			$res->total_guests = $reservation['total_guests'];
+			$res->time_in = $time_in->toTimeString();
+			$res->time_out = $time_in->addHour(1)->toTimeString();
+			$res->date = $reservation_date;
+			$res->table_nr = $reservation['table_nr'];
+			// dd($res);
+			$res->save();
+
+			return response()->json([
+			   'message' => 'Success'
+			], 200);
+		}
+	}
 }

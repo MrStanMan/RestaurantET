@@ -36,9 +36,9 @@ body .container
 	background-repeat: no-repeat;
 }
 .unavailable {
-	background-color: #00ffff;
+	background-color: red;
 }
 .available {
-	background-color: #ff00ff;
+	background-color: green;
 	border-radius: 0px;
 }

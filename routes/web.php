@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth', 'cstatus']], function () {
 
 	Route::get('profile/{user}', 'AccountController@show_user')->name('profile_index');
 
+	Route::get('profile/{user}/bestelling/{reservation_nr}', 'OrderController@view_customer_order_user');
+
 });
 
 Route::group(['middleware' => 'role:administrator'], function() {
@@ -54,7 +56,7 @@ Route::group(['middleware' => 'role:administrator'], function() {
     Route::get('/admin/users', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
 });
 
-Route::group(['middleware' => 'role:employee'], function () {
+Route::group(['middleware' => 'permission:read-order|create-order|delete-order|update-order'], function () {
 	Route::get('/bestellingen', 'OrderController@index')->name('orders_home');
 	Route::get('/bestelling/{customer_nr}', 'OrderController@view_customer_order')->name('view_customer_order');
 	Route::get('/bestellingen/{customer_nr}', 'OrderController@view_customer_order_json');
