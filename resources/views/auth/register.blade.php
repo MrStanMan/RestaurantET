@@ -11,8 +11,8 @@
 <div class="container">
     <div class="row justify-content-center text-white">
         <div class="col-md-12 col-sm-12 col-12 col-lg-10">
-            <div class="card bg-secondary">
-                <div class="card-header bg-primary">{{ __('Register') }}</div>
+            <div class="card" style="background-color: #fff9;">
+                <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
