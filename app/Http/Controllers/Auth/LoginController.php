@@ -42,20 +42,22 @@ class LoginController extends Controller
 
   public function login(Request $request)
   {
+    if ($this->hasTooManyLoginAttempts($request)) {
+      // $this->fireLockoutEvent($request);
+      $this->clearLoginAttempts($request);
+      return redirect()->route('password.request')->with('error', 'Too many login attempts');
+    }
     $this->validateLogin($request);
 
-    if ($this->hasTooManyLoginAttempts($request)) {
-      $this->fireLockoutEvent($request);
-
-      return $this->sendLockoutResponse($request);
-    }
-
-    $credentials = $request->only('customer_nr', 'password');
-    // Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1])
+    // $credentials = $request->only('customer_nr', 'password', 'status');
+    // $meme = Auth::attempt(['customer_nr' => $request->customer_nr, 'password' => $request->password]);
     if (Auth::attempt(['customer_nr' => $request->customer_nr, 'password' => $request->password, 'status' => 0])) {
       // Authentication passed...
+      $this->clearLoginAttempts($request);
       return redirect()->route('home');
     } elseif(Auth::attempt(['customer_nr' => $request->customer_nr, 'password' => $request->password, 'status' => 1])) {
+      $this->clearLoginAttempts($request);
+      Auth::logout();
       return redirect()->back()->with('error', 'Uw account is niet verifieerd of is geblokkeerd. Neem contact op met de administrator.');
     }
     else{
@@ -77,6 +79,15 @@ class LoginController extends Controller
   {
     return view('auth.login');
   }
+
+  protected function hasTooManyLoginAttempts(Request $request)
+{
+    $maxLoginAttempts = 3;
+
+    return $this->limiter()->tooManyAttempts(
+        $this->throttleKey($request), $maxLoginAttempts
+    );
+}
 
   use AuthenticatesUsers;
 

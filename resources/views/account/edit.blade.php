@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-<div class="card">
+<div class="card" style="background-color: #fff9;">
 	<div class="card-header">Account gegevens</div>
 	<div class="card-body">
 	<form action="{{ url('/profile/edit') }}/{{$user->customer_nr}}" method="POST">
@@ -118,7 +118,7 @@
 	</div>
 </div>
 <br>
-<div class="card">
+<div class="card" style="background-color: #fff9;">
 	<div class="card-header">Verander Wachtwoord</div>
 	<div class="card-body">
     <form method="POST" action="{{ url('profile/password/update') }}/{{$user->customer_nr}}">

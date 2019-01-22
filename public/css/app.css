@@ -170,9 +170,8 @@ sup {
 }
 
 a {
-  color: #3490dc;
+  color: #fff !important;
   text-decoration: none;
-  background-color: transparent;
 }
 
 a:hover {
@@ -4317,7 +4316,7 @@ input[type=button].btn-block {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #495057;
+  color: #fff;
   background-color: #f8fafc;
   border-color: #dee2e6 #dee2e6 #f8fafc;
 }
@@ -4335,7 +4334,7 @@ input[type=button].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #3490dc;
+  background-color: #ffffff69;
 }
 
 .nav-fill .nav-item {
