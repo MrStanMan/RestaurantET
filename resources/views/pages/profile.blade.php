@@ -66,9 +66,28 @@
 	<div class="card">
 			<h3 class="card-header">Facturen</h3>
 		<div class="card_body p-4">
-		<p class="card-text">
-			Je hebt nog geen facturen
-		</p>
+		@if (!$user->reservation == [])
+			<table class="table"> 
+				<tr>
+					<th>#</th>
+					<th>Datum</th>
+					<th>tijd</th>
+					<th>Tafelnummer</th>
+				</tr>
+				@foreach ($user->reservation as $reservation)
+					<tr>
+						<td>{{$reservation->reservation_nr}}</td>
+						<td>{{$reservation->date}}</td>
+						<td>{{$reservation->time_in	}}</td>
+						<td>{{$reservation->table[0]->table_nr }}</td>
+					</tr>
+				@endforeach
+			</table>
+			@else
+			<p class="card-text">
+				geen reservaties
+			</p>
+			@endif
 		</div>
 	</div>
 </div>

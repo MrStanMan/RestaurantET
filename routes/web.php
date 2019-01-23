@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth', 'cstatus']], function () {
 
 	Route::get('profile/{user}', 'AccountController@show_user')->name('profile_index');
 
+	Route::get('profile/notes/{customer_nr}', 'CreatepdfController@index');
+	Route::get('profile/notes/{customer_nr}/download', 'CreatepdfController@downloadPDF');
 });
 
 Route::group(['middleware' => 'role:administrator'], function() {
