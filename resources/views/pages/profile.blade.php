@@ -85,14 +85,18 @@
 					<th>#</th>
 					<th>Datum</th>
 					<th>tijd</th>
-					<th>Tafelnummer</th>
+					<th>-</th>
 				</tr>
 				@foreach ($user->reservation as $reservation)
 					<tr>
 						<td>{{$reservation->reservation_nr}}</td>
 						<td>{{$reservation->date}}</td>
 						<td>{{$reservation->time_in	}}</td>
-						<td>{{$reservation->table[0]->table_nr }}</td>
+						<td>
+							<a href="/profile/notes/{{$reservation->reservation_nr}}/{{$user->customer_nr}}" class="btn btn-sm btn-primary">
+								Bekijk
+							</a>
+						</td>
 					</tr>
 				@endforeach
 			</table>
