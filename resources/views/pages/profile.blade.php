@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-<div class="row" style="color: #000 !important;">
+<div class="row">
 <div class="col-md-6 col-lg-6 col-12 col-sm-12">
 	<div class="card ">
 			<h3 class="card-header">Account gegevens</h3>
@@ -36,29 +36,42 @@
 		  </div>
 	</div>
 	<br>
-	<div class="card p-4">
-			<h2 class="card-title">Reservaties</h2>
+	<div class="card p-0">
+			<h2 class="card-header px-4 pt-3">Reservaties</h2>
 		<div class="card_body">
-			@if ($user->reservation == [])
-			<p class="card-text">
-				geen reservaties
-			</p>
-			@else
+			@foreach ($user->reservation as $reservation)
+				@if($reservation->date == $today)
+					<h4 class="card-title px-2 pt-2">
+						Vandaag
+					</h4>
+					<table class="table">
+					<tr>
+						<td>{{$reservation->date}}</td>
+						<td>{{$reservation->time_in	}}</td>
+						<td>{{$reservation->table_nr }}</td>
+					</tr>
+				</table>
+				@endif
+			@endforeach
+			<h4 class="card-title px-2 pt-2">
+				Toekomst
+			</h4>
 			<table class="table"> 
 				<tr>
 					<th>Datum</th>
 					<th>tijd</th>
 					<th>Tafelnummer</th>
+					<th>Bekijk</th>
 				</tr>
 				@foreach ($user->reservation as $reservation)
 					<tr>
 						<td>{{$reservation->date}}</td>
 						<td>{{$reservation->time_in	}}</td>
-						<td>{{$reservation->table[0]->table_nr }}</td>
+						<td>{{$reservation->table_nr }}</td>
+						<td><a href="/profile/{{ $user->customer_nr }}/bestelling/{{$reservation->reservation_nr}}" style="text-align: center;"><i class="fas fa-eye fa-lg"></i></a>
 					</tr>
 				@endforeach
 			</table>
-			@endif
 		</div>
 	</div>
 </div>

@@ -17,7 +17,7 @@ class Reservation extends Model
 
     public function table()
     {
-        return $this->hasMany('App\Table', 'table_nr', 'table_nr');
+        return $this->hasOne('App\Table', 'table_nr', 'table_nr');
     }
 
     public function order()

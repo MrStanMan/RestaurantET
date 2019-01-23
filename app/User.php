@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\VerifyEmail;
 use Laratrust\Traits\LaratrustUserTrait;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Support\Facades\Auth;
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -37,6 +38,16 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function scopeCheck($query, $customer_nr)
+    {
+        if ($customer_nr == Auth::id()) {
+            return $query->where('customer_nr', $customer_nr)->get()->first();
+        } else {
+            return false;
+        }
+        // return $query->where('customer_nr', $customer_nr)->get()->first();
+    }
 
     /**
      * Send the email verification notification.
