@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Charm|Comfortaa:400');
 
-::-webkit-scrollbar { 
-    display: none; 
-}
 
 html body {
 	font-family: 'Comfortaa', cursive;

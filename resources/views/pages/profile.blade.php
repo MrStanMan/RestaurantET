@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-<div class="row" style="color: #000 !important;">
+<div class="row">
 <div class="col-md-6 col-lg-6 col-12 col-sm-12">
 	<div class="card ">
 			<h3 class="card-header">Account gegevens</h3>

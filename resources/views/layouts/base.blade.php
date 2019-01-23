@@ -24,10 +24,10 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
-<body style="background: url(https://wallpapertag.com/wallpaper/full/6/d/d/555292-most-popular-fancy-background-images-2560x1600-hd.jpg);">
+<body>
 <div class="container-fluid">
-	<div class="row" style="color: #fff;">
-		<div class="col-md-12 jumbotron" style="opacity: 0.8;">
+	<div class="row">
+		<div class="col-md-12 jumbotron">
 			<a href="{{ route('home') }}">
 				<img src="{{ asset('img/logo_black.png') }}" id="logo">
 			</a>
@@ -38,7 +38,7 @@
 					<a class="nav-item nav-link {{ (\Request::route()->getName() == 'login') ? 'active' : '' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
 					<a class="nav-item nav-link {{ (\Request::route()->getName() == 'register') ? 'active' : '' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
 				@else
-					<a class="flex-md-fill nav-item nav-link {{ (\Request::route()->getName() == 'profile_index' || \Request::route()->getName() == 'get_user' || \Request::route()->getName() == 'delete_account' || \Request::route()->getName() == 'admin_home') ? 'active' : '' }}" data-toggle="dropdown" aria-haspopup="true" style="background-color: #ffffff69;" aria-expanded="false"> {{ Auth::user()->first_name }} <span style="float: right;" ><i class="fas fa-chevron-down"></i></span></a>
+					<a class="flex-md-fill nav-item nav-link {{ (\Request::route()->getName() == 'profile_index' || \Request::route()->getName() == 'get_user' || \Request::route()->getName() == 'delete_account' || \Request::route()->getName() == 'admin_home') ? 'active' : '' }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->first_name }} <span style="float: right;" ><i class="fas fa-chevron-down"></i></span></a>
 					<div class="dropdown-menu">
 				      	<a class="dropdown-item" href="{{ url('profile') }}/{{ Auth::user()->customer_nr }}">Mijn account</a>
 			      	@role('administrator')
@@ -60,11 +60,11 @@
                                     </a>
 			    	</div>
 			    @endif
-				<a class="flex-sm-fill nav-item nav-link" style="color: #ffffff;" href="{{ route('about') }}">Over ons</a>
-				<a class="flex-sm-fill nav-item nav-link" style="color: #ffffff;" href="{{ route('contact') }}">Contact</a>
-				<a class="flex-sm-fill nav-item nav-link" style="color: #ffffff;" href="{{ route('menukaart') }}">Menu kaart</a>
+				<a class="flex-sm-fill nav-item nav-link" href="{{ route('about') }}">Over ons</a>
+				<a class="flex-sm-fill nav-item nav-link" href="{{ route('contact') }}">Contact</a>
+				<a class="flex-sm-fill nav-item nav-link" href="{{ route('menukaart') }}">Menu kaart</a>
 				@auth
-					<a class="flex-sm-fill nav-item nav-link" style="color: #ffffff;" href="{{ route('reserveer_index') }}">Reserveren</a>
+					<a class="flex-sm-fill nav-item nav-link" href="{{ route('reserveer_index') }}">Reserveren</a>
 				@endauth
 			</nav>
 		</div>

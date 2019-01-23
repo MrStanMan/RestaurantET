@@ -170,12 +170,13 @@ sup {
 }
 
 a {
-  color: #fff !important;
+  color: #3490dc;
   text-decoration: none;
+  background-color: transparent;
 }
 
 a:hover {
-  color: #1d68a7;
+  color: #fff;
   text-decoration: underline;
 }
 
@@ -4334,7 +4335,7 @@ input[type=button].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #ffffff69;
+  background-color: #3490dc;
 }
 
 .nav-fill .nav-item {
