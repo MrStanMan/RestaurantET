@@ -13,39 +13,39 @@ class TablesSeeder extends Seeder
     {
         DB::table('tables')->insert([
         	[
-        		'table_nr' => '01',
+        		'table_nr' => '1',
 	        	'status' => True,
 	        	'total_chairs' => '2'
 	        ], [
-	        	'table_nr' => '02',
+	        	'table_nr' => '2',
 	        	'status' => True,
 	        	'total_chairs' => '2'
 	        ], [
-	        	'table_nr' => '03',
+	        	'table_nr' => '3',
 	        	'status' => True,
 	        	'total_chairs' => '2'
 	        ], [
-	        	'table_nr' => '04',
+	        	'table_nr' => '4',
 	        	'status' => True,
 	        	'total_chairs' => '3'
 	        ], [
-	        	'table_nr' => '05',
+	        	'table_nr' => '5',
 	        	'status' => True,
 	        	'total_chairs' => '3'
 	        ], [
-	        	'table_nr' => '06',
+	        	'table_nr' => '6',
 	        	'status' => True,
 	        	'total_chairs' => '3'
 	        ], [
-	        	'table_nr' => '07',
+	        	'table_nr' => '7',
 	        	'status' => True,
 	        	'total_chairs' => '4'
 	        ], [
-	        	'table_nr' => '08',
+	        	'table_nr' => '8',
 	        	'status' => True,
 	        	'total_chairs' => '4'
 	        ], [
-	        	'table_nr' => '09',
+	        	'table_nr' => '9',
 	        	'status' => True,
 	        	'total_chairs' => '4'
 	        ], [

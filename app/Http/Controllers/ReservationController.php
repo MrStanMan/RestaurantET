@@ -82,11 +82,6 @@ class ReservationController extends Controller
 				if ($reservation['time_in'] == $a_reservation->time_out && $reservation_date === $a_reservation->date) {
 					return true;
 				}
-				if ($reservation['table_nr'] == (int)$a_reservation->table_nr) {
-					return response()->json([
-						'message' => 'De tafel die u heeft gekozen is al bezet'
-					], 400);
-				}
 			}
 			// create the the new reservation
 			$res = new Reservation;

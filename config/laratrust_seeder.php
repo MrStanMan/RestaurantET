@@ -5,7 +5,8 @@ return [
         'administrator' => [
             'users' => 'c,r,u,d',
             'profile' => 'r,u',
-            'reservation' => 'c,r,u,d'
+            'reservation' => 'c,r,u,d',
+            'order' => 'c,r,u,d'
         ],
         'employee' => [
             'order' => 'c,r,u,d',

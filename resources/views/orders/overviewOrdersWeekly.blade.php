@@ -16,7 +16,12 @@
 				@foreach($res_week as $res)
 				<tr>
 					<td>{{ $res->user->first_name }}</td>
-					<td><a href="{{ url('bestelling')}}/{{$res->reservation_nr }}">{{ $res->customer_nr }}</a></td>
+					@role('administrator')
+						<td><a href="/profile/{{ $res->user->customer_nr }}/bestelling/{{$res->reservation_nr}}">{{ $res->customer_nr }}</a>
+					@endrole
+					@role('employee')
+						<td><a href="{{ url('bestelling')}}/{{$res->reservation_nr }}">{{ $res->customer_nr }}</a></td>
+					@endrole
 					<td>{{ $res->table_nr }}</td>
 					<td>{{ $res->reservation_nr }}</td>
 				</tr>
