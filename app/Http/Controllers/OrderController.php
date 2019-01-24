@@ -22,16 +22,18 @@ class OrderController extends Controller
     	$start_week = Carbon::now()->startOfWeek()->toDateString();
     	$end_week = Carbon::now()->endOfWeek()->toDateString();
 
+        $start_month = CArbon::now()->startOfMonth()->toDateString();
+        $end_month = Carbon::now()->endOfMonth()->toDateString();
+
     	$reservation = Reservation::where('date', $date->toDateString())->orderBy('date', 'desc')->get();
     	$res_week = Reservation::whereBetween('date', [$start_week, $end_week])->get();
+        $res_month = Reservation::whereBetween('date', [$start_month, $end_month])->get();
 
-    	return view('pages.order', compact('orders', 'tables', 'reservation', 'res_week'));
+    	return view('pages.order', compact('orders', 'tables', 'reservation', 'res_week', 'res_month'));
     }
     public function view_customer_order($reservation_nr)
     {
-    	// $order = Order::where('reservation_nr', $reservation_nr)->get();
     	$reservation = Reservation::where('reservation_nr', $reservation_nr)->get()->first();
-    	// dd($reservation->order);
     	$products = Product::all();
     	return view('orders.customerOrder', compact('reservation', 'products'));
     }

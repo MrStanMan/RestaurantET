@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'cstatus']], function () {
 Route::group(['middleware' => 'role:administrator'], function() {
     Route::get('/admin', 'AdminController@welcome')->name('admin_home');
     Route::get('/admin/users', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
+	Route::get('/admin/bestellingen', 'OrderController@index');
 });
 
 Route::group(['middleware' => 'permission:read-order|create-order|delete-order|update-order'], function () {

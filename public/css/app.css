@@ -176,7 +176,7 @@ a {
 }
 
 a:hover {
-  color: #fff;
+  color: #1d68a7;
   text-decoration: underline;
 }
 
@@ -4317,7 +4317,7 @@ input[type=button].btn-block {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #fff;
+  color: #495057;
   background-color: #f8fafc;
   border-color: #dee2e6 #dee2e6 #f8fafc;
 }

@@ -1,6 +1,6 @@
 <div class="card">
 	<div class="card-header">
-		<h2>Overzicht van {{ \Carbon\Carbon::now()->toFormattedDateString() }}</h2>
+		<h2>Overzicht van de maand {{ \Carbon\Carbon::now()->localeMonth }}</h2>
 	</div>
 	<div class="card-body p-0">
 		<table class="table">
@@ -9,11 +9,11 @@
 					<th>Klant naam</th>
 					<th>Klant nummer</th>
 					<th>Tafel nummer</th>
-					<th>Aankomst tijd</th>
+					<th>Datum en tijd</th>
 				</tr>
 			</thead>
 			<tbody>
-				@foreach($reservation as $res)
+				@foreach($res_month as $res)
 				<tr>
 					<td>{{ $res->user->first_name }}</td>
 					@role('administrator')
