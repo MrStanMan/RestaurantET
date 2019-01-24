@@ -61,6 +61,7 @@ class ReservationController extends Controller
 			'total_guests' => 'required',
 			'reservation_nr' => 'required',
 			'customer_nr' => 'required',
+			'extra_info' => 'max:128',
 		]);
 
 		// if they aren't return
@@ -117,6 +118,7 @@ class ReservationController extends Controller
 			$res->time_in = $time_in->toTimeString();
 			$res->time_out = $time_in->addHour(1)->toTimeString();
 			$res->date = $reservation_date;
+			$res->extra_info = $reservation['extra_info'];
 			$res->table_nr = $reservation['table_nr'];
 			// dd($res);
 			$res->save();

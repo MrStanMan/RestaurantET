@@ -2014,6 +2014,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2030,11 +2044,13 @@ __webpack_require__.r(__webpack_exports__);
       total_guests: '',
       selected_table: '',
       customer_nr: '',
+      extra_info: '',
       reservation: {
         reservation_nr: '',
         total_guests: '',
         table_nr: '',
-        customer_nr: ''
+        customer_nr: '',
+        extra_info: ''
       },
       message: ''
     };
@@ -2061,7 +2077,8 @@ __webpack_require__.r(__webpack_exports__);
         date: this.reservation_date,
         total_guests: parseInt(this.total_guests),
         table_nr: parseInt(this.selected_table),
-        customer_nr: parseInt(this.customer_nr)
+        customer_nr: parseInt(this.customer_nr),
+        extra_info: this.extra_info
       });
       axios.post('/reserveer', {
         reservation: this.reservation
@@ -37307,250 +37324,8 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
-        on: {
-          "~click": function($event) {
-            return _vm.checkAdmin($event)
-          }
-        }
-      },
-      [_vm._v("incourante reservatie")]
-    ),
-    _vm._v(" "),
-    (_vm.admin
-    ? true
-    : "")
-      ? _c("div", [
-          _vm._v(
-            "\n\tWanneer je als admin een bestelling doet word de tafel status op gereserveerd staan. De tafels zijn vrij te geven op Deze pagina.\n"
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        attrs: { action: "/reserveer", method: "POST" },
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.onSubmit($event)
-          }
-        }
-      },
-      [
-        _vm.message != ""
-          ? _c(
-              "div",
-              {
-                staticClass: "alert alert-primary",
-                attrs: { role: "alert" },
-                model: {
-                  value: _vm.message,
-                  callback: function($$v) {
-                    _vm.message = $$v
-                  },
-                  expression: "message"
-                }
-              },
-              [_vm._v("\n\t\t" + _vm._s(_vm.message) + "\n\t")]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-row col-12" }, [
-          _c(
-            "div",
-            { staticClass: "form-group col-md-4 col-sm-12 col-12 " },
-            [
-              _c("label", { attrs: { for: "customer_nr" } }, [
-                _vm._v("Klantnummer")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", name: "customer_nr", disabled: "" },
-                domProps: { value: _vm.customer_nr }
-              }),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "date" } }, [
-                _vm._v("Datum en tijd")
-              ]),
-              _c("br"),
-              _vm._v(" "),
-              _c("date-picker", {
-                attrs: {
-                  filter: "moment",
-                  lang: "en",
-                  type: "datetime",
-                  "value-type": "format",
-                  format: "YYYY-MM-DD HH:mm:ss",
-                  "time-picker-options": {
-                    start: "10:00",
-                    step: "01:00",
-                    end: "22:00"
-                  },
-                  confirms: "",
-                  "not-before": new Date()
-                },
-                model: {
-                  value: _vm.reservation_date,
-                  callback: function($$v) {
-                    _vm.reservation_date = $$v
-                  },
-                  expression: "reservation_date"
-                }
-              }),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "total_guests" } }, [
-                _vm._v("Aantal personen")
-              ]),
-              _vm._v(" "),
-              _vm.admin == true
-                ? [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.total_guests,
-                          expression: "total_guests"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "number",
-                        name: "total_guests",
-                        max: "80",
-                        min: "0"
-                      },
-                      domProps: { value: _vm.total_guests },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.total_guests = $event.target.value
-                        }
-                      }
-                    })
-                  ]
-                : [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.total_guests,
-                          expression: "total_guests"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "number",
-                        name: "total_guests",
-                        max: "8",
-                        min: "0"
-                      },
-                      domProps: { value: _vm.total_guests },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.total_guests = $event.target.value
-                        }
-                      }
-                    })
-                  ]
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-4 col-sm-12 col-12 " }, [
-            _c("label", { attrs: { for: "table_nr" } }, [
-              _vm._v("Selecteer uw tafel")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.selected_table,
-                    expression: "selected_table"
-                  }
-                ],
-                staticClass: "custom-select",
-                staticStyle: { overflow: "hidden" },
-                attrs: { size: "10" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.selected_table = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              _vm._l(_vm.tables, function(table) {
-                return (table.status
-                ? 1
-                : 0)
-                  ? _c("option", [
-                      _vm._v(
-                        "Tafel : " +
-                          _vm._s(table.table_nr) +
-                          " stoelen : " +
-                          _vm._s(table.total_chairs)
-                      )
-                    ])
-                  : _vm._e()
-              }),
-              0
-            )
-          ]),
-          _vm._v(" "),
-          _vm._m(0)
-        ])
-      ]
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 align-items-end" }, [
-      _c("input", {
-        staticClass: "btn btn-primary",
-        attrs: { type: "submit", name: "submit", value: "Reserveer" }
-      })
-    ])
-  }
-]
-render._withStripped = true
+var render = function () {}
+var staticRenderFns = []
 
 
 
