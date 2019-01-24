@@ -22,6 +22,14 @@
 			
 		<table style="margin-top: 1px; width: 300px; border-collapse: collapse;">
 			<tr>
+				<td style="text-align: left; background: #000; color: #fff; border: 1px solid black; padding: 5px;">KLANT NR</td>
+				<td style="text-align: right; border: 1px solid black; padding: 5px;">{{ $reservation[0]->customer_nr }}</td>
+			</tr>
+			<tr>
+				<td style="text-align: left; background: #000; color: #fff; border: 1px solid black; padding: 5px;">PERSONEN</td>
+				<td style="text-align: right; border: 1px solid black; padding: 5px;">{{ $reservation[0]->total_guests }}</td>
+			</tr>
+			<tr>
 				<td style="text-align: left; background: #000; color: #fff; border: 1px solid black; padding: 5px;">TAFEL</td>
 				<td style="text-align: right; border: 1px solid black; padding: 5px;">{{ $reservation[0]->table_nr }}</td>
 			</tr>
@@ -53,7 +61,7 @@
 			<tr style='border-bottom: 1px solid #000;'>
 				<td style='border: 1px solid black; padding: 5px; vertical-align: top; text-align: left;'>{{ $order->product[0]->product_description}}</td>
 				<td style='border: 1px solid black; padding: 5px; vertical-align: top; text-align: left;'>{{ $order->total_ordered }}</td>
-				<td style='border: 1px solid black; padding: 5px; vertical-align: top; text-align: left;'>&euro; {{ $product_total }}</td>
+				<td style='border: 1px solid black; padding: 5px; vertical-align: top; text-align: left;'>&euro; {{ number_format($product_total, 2) }}</td>
 			</tr>
 		@endforeach
 			

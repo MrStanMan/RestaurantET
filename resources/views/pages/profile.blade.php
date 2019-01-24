@@ -62,6 +62,7 @@
 					<th>tijd</th>
 					<th>Tafelnummer</th>
 					<th>Bekijk</th>
+					<th>-</th>
 				</tr>
 				@foreach ($user->reservation as $reservation)
 					<tr>
@@ -69,6 +70,16 @@
 						<td>{{$reservation->time_in	}}</td>
 						<td>{{$reservation->table_nr }}</td>
 						<td><a href="/profile/{{ $user->customer_nr }}/bestelling/{{$reservation->reservation_nr}}" style="text-align: center;"><i class="fas fa-eye fa-lg"></i></a>
+						<td>
+							<form action="/profile/delete/reservation/{{$reservation->reservation_nr}}" method="post">
+								{{method_field('DELETE')}}
+								{{csrf_field()}}
+											
+								<button type="submit" class="btn btn-danger">
+									Annuleren
+								</button>
+							</form>
+						</td>
 					</tr>
 				@endforeach
 			</table>

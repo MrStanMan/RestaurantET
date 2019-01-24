@@ -8,6 +8,7 @@ use App\Reservation;
 use App\User;
 use App\Role;
 use App\Table;
+use App\Order;
 use Carbon\Carbon;
 use Validator;
 use App\Http\Requests\MakeReservation;
@@ -24,6 +25,24 @@ class ReservationController extends Controller
 		// dd($today);
 		return view('pages.reservation', compact('tables', 'reservations', 'user', 'today'));
 	}
+	
+	public function deleteReservation(Request $request, $reservation_nr)
+    {
+		$order = Order::where('reservation_nr', $reservation_nr)->get();
+		
+		if($order->first())
+		{
+			return redirect()->back()->with('error', 'Op deze reservering zijn al bestellingen geplaatst !');
+		}
+		else
+		{
+			$reservation = Reservation::find($reservation_nr);
+			$reservation->delete($request->all());
+		
+			return redirect()->back()->with('success', 'De reservering is succesvol geanulleerd !');
+		}
+    }
+	
 	public function reservate(Request $request)
 	{
 		// get reservation from vue object

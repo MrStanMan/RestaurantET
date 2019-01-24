@@ -51,7 +51,8 @@ Route::group(['middleware' => ['auth', 'cstatus']], function () {
 	Route::get('profile/notes/{reservation_nr}/{customer_nr}/download', 'CreatepdfController@downloadPDF');
 	
 	Route::get('profile/{user}/bestelling/{reservation_nr}', 'OrderController@view_customer_order_user');
-
+	
+	Route::delete('profile/delete/reservation/{reservation_nr}', 'ReservationController@deleteReservation');
 });
 
 Route::group(['middleware' => 'role:administrator'], function() {
