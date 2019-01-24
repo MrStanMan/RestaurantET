@@ -42,3 +42,8 @@ body .container
 	background-color: green;
 	border-radius: 0px;
 }
+
+.extra_infotab{
+	word-wrap: break-word;
+	max-width: 150px;
+}

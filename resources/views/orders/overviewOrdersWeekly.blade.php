@@ -10,6 +10,7 @@
 					<th>Klant nummer</th>
 					<th>Tafel nummer</th>
 					<th>Datum en tijd</th>
+					<th class="extra_infotab">Extra info</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,6 +25,7 @@
 					@endrole
 					<td>{{ $res->table_nr }}</td>
 					<td>{{ $res->reservation_nr }}</td>
+					<td class="extra_infotab">{{ $res->extra_info }}</td>
 				</tr>
 				@endforeach
 			</tbody>

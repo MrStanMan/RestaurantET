@@ -22,6 +22,7 @@ class Reservations extends Migration
             $table->time('time_in');
             $table->time('time_out');
             $table->string('total_guests', 64);
+            $table->string('extra_info', 255);
             $table->date('date');
             $table->timestamps();
         });

@@ -1,6 +1,6 @@
 <template>
 
-<form action="/reserveer" method="POST" @submit.prevent="onSubmit">
+<form action="/reserveer" method="POST" id="resr" @submit.prevent="onSubmit">
 	<div class="alert alert-primary" role="alert" v-if="message != ''" v-model="message">
 		{{ message }}
 	</div>
@@ -14,7 +14,11 @@
             <br>
 			<label for="total_guests">Aantal personen</label>
 			<input type="number" class="form-control" name="total_guests" v-model="total_guests" max="8" min="0">
-        </div>		
+			<br>
+			<label for="extra_info">Extra info ( Allergieën, dieet etc. )</label>
+			<textarea form="resr" class="form-control" name="extra_info" v-model="extra_info"></textarea>
+        </div>
+
 		<div class="form-group col-md-4 col-sm-12 col-12 ">
 			<label for="table_nr">Selecteer uw tafel</label>
 			<select class="custom-select" size="10" v-model="selected_table" style="overflow:hidden;">
@@ -25,7 +29,7 @@
 			<input type="submit" name="submit" value="Reserveer" class="btn btn-primary">
 		</div>
     </div>
-    
+
 </form>
 </template>
 <script>
@@ -42,11 +46,13 @@ export default {
 			total_guests: '',
 			selected_table: '',
 			customer_nr: '',
+			extra_info: '',
 			reservation: {
 				reservation_nr: '',
 				total_guests: '',
 				table_nr: '',
 				customer_nr: '',
+				extra_info: '',
 			},
 			message: '',
 		}
@@ -61,6 +67,7 @@ export default {
   				total_guests: parseInt(this.total_guests),
   				table_nr: parseInt(this.selected_table),
   				customer_nr: parseInt(this.customer_nr),
+					extra_info: this.extra_info
   			});
 			axios.post('/reserveer', {
 				reservation: this.reservation,

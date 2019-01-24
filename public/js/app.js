@@ -2004,6 +2004,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2019,11 +2023,13 @@ __webpack_require__.r(__webpack_exports__);
       total_guests: '',
       selected_table: '',
       customer_nr: '',
+      extra_info: '',
       reservation: {
         reservation_nr: '',
         total_guests: '',
         table_nr: '',
-        customer_nr: ''
+        customer_nr: '',
+        extra_info: ''
       },
       message: ''
     };
@@ -2039,7 +2045,8 @@ __webpack_require__.r(__webpack_exports__);
         date: this.reservation_date,
         total_guests: parseInt(this.total_guests),
         table_nr: parseInt(this.selected_table),
-        customer_nr: parseInt(this.customer_nr)
+        customer_nr: parseInt(this.customer_nr),
+        extra_info: this.extra_info
       });
       axios.post('/reserveer', {
         reservation: this.reservation
@@ -37110,9 +37117,9 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\n                        " +
+                  "\r\n                        " +
                     _vm._s(_vm.message) +
-                    "\n                    "
+                    "\r\n                    "
                 )
               ]
             ),
@@ -37135,9 +37142,9 @@ var render = function() {
                   return _c("div", { staticClass: "form-row py-2" }, [
                     _c("div", { staticClass: "col-9" }, [
                       _vm._v(
-                        "\n                                " +
+                        "\r\n                                " +
                           _vm._s(order.product.product_description) +
-                          "\n                            "
+                          "\r\n                            "
                       )
                     ]),
                     _vm._v(" "),
@@ -37292,7 +37299,7 @@ var render = function() {
   return _c(
     "form",
     {
-      attrs: { action: "/reserveer", method: "POST" },
+      attrs: { action: "/reserveer", method: "POST", id: "resr" },
       on: {
         submit: function($event) {
           $event.preventDefault()
@@ -37315,7 +37322,7 @@ var render = function() {
                 expression: "message"
               }
             },
-            [_vm._v("\n\t\t" + _vm._s(_vm.message) + "\n\t")]
+            [_vm._v("\r\n\t\t" + _vm._s(_vm.message) + "\r\n\t")]
           )
         : _vm._e(),
       _vm._v(" "),
@@ -37392,6 +37399,34 @@ var render = function() {
                     return
                   }
                   _vm.total_guests = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "extra_info" } }, [
+              _vm._v("Extra info ( Allergieën, dieet etc. )")
+            ]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.extra_info,
+                  expression: "extra_info"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { form: "resr", name: "extra_info" },
+              domProps: { value: _vm.extra_info },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.extra_info = $event.target.value
                 }
               }
             })
@@ -53930,8 +53965,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/obe/Examen/RestaurantET/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/obe/Examen/RestaurantET/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\School\Examen\RestaurantET2\RestaurantET\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\School\Examen\RestaurantET2\RestaurantET\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
