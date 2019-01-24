@@ -35,15 +35,66 @@ body .container
 	background-position: center;
 	background-repeat: no-repeat;
 }
+
 .unavailable {
 	background-color: red;
 }
+
 .available {
 	background-color: green;
 	border-radius: 0px;
 }
+.row .navigation
+{
+	border-right: 1px solid black;
+}
 
-.extra_infotab{
-	word-wrap: break-word;
-	max-width: 150px;
+.nav .nav-link.active
+{
+	background-color: #6e2600;
+}
+
+/* Homepage */
+
+.homepage .carousel
+{
+	width: 800px;
+    height: 500px;
+	margin: 0px auto 0px auto ;
+}
+
+.homepage .carousel-inner
+{
+	width: 800px;
+    height: 500px;
+}
+
+
+/* Contact */
+
+body .contact
+{
+	display: flex;
+}
+
+.contact .contact-left,
+.contact .contact-right
+{
+	width: 50%;
+}
+
+.contact  .contact-left
+{
+    padding-right: 50px;
+    border-right: 1px solid #bebebe;
+}
+
+.contact .contact-right
+{
+	padding-left: 50px;
+}
+
+.contact .contact-send
+{
+	margin-left: calc(100% - 97px);
 }
