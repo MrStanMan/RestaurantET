@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row justify-content-center text-white">
         <div class="col-md-12 col-sm-12 col-12 col-lg-10">
-            <div class="card" style="background-color: #fff9;">
+            <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">

@@ -1,5 +1,9 @@
 <template>
-
+<div class="row">
+<button class="btn btn-primary" v-on:click.once="checkAdmin">incourante reservatie</button>
+<div v-if="admin ? true : ''">
+	Wanneer je als admin een bestelling doet word de tafel status op gereserveerd staan. De tafels zijn vrij te geven op Deze pagina.
+</div>
 <form action="/reserveer" method="POST" @submit.prevent="onSubmit">
 	<div class="alert alert-primary" role="alert" v-if="message != ''" v-model="message">
 		{{ message }}
@@ -7,18 +11,23 @@
 	<div class="form-row col-12">
     	<div class="form-group col-md-4 col-sm-12 col-12 ">
     		<label for="customer_nr">Klantnummer</label>
-            <input type="text" name="customer_nr" class="form-control"  :value="customer_nr" disabled="">
+            <input type="text" name="customer_nr" class="form-control" :value="customer_nr" disabled="">
             <br>
     		<label for="date">Datum en tijd</label><br>
             <date-picker filter="moment" v-model="reservation_date" lang="en" type="datetime" value-type="format" format="YYYY-MM-DD HH:mm:ss" :time-picker-options="{ start: '10:00', step: '01:00', end: '22:00' }" confirms :not-before="new Date()"></date-picker>
             <br>
 			<label for="total_guests">Aantal personen</label>
-			<input type="number" class="form-control" name="total_guests" v-model="total_guests" max="8" min="0">
+			<template v-if="admin == true">
+				<input type="number" class="form-control" name="total_guests" v-model="total_guests"  max="80" min="0">
+			</template>
+			<template v-else>
+				<input type="number" class="form-control" name="total_guests" v-model="total_guests"  max="8" min="0">
+			</template>
         </div>		
 		<div class="form-group col-md-4 col-sm-12 col-12 ">
 			<label for="table_nr">Selecteer uw tafel</label>
 			<select class="custom-select" size="10" v-model="selected_table" style="overflow:hidden;">
-				<option v-for="table in tables">{{ table.table_nr }}</option>
+				<option v-for="table in tables" v-if="table.status ? 1 : 0">Tafel : {{ table.table_nr }} stoelen : {{ table.total_chairs }}</option>
 			</select>
 		</div>
 		<div class="col-12 align-items-end">
@@ -27,6 +36,7 @@
     </div>
     
 </form>
+</div>
 </template>
 <script>
 import DatePicker from 'vue2-datepicker';
@@ -37,6 +47,7 @@ export default {
   	props: ['reservations', 'tables', 'user'],
   	data: () => {
 		return {
+			admin: false,
 			reservation_date: new Date(),
 			selected_time: '',
 			total_guests: '',
@@ -52,6 +63,16 @@ export default {
 		}
 	},
   	methods: {
+  		checkAdmin() {
+  			axios.post('/profile/api', {
+  			customer_nr: this.user.customer_nr,
+	  		})
+			.then((response) => {
+				if (response.data.admin.first_name == 'Administrator') {
+					this.admin = true;
+				}
+			});
+  		},
   		onSubmit() {
   			// console.log(this.user);
   			this.reservation = Object.assign({}, this.reservation, {
@@ -62,6 +83,7 @@ export default {
   				table_nr: parseInt(this.selected_table),
   				customer_nr: parseInt(this.customer_nr),
   			});
+  			
 			axios.post('/reserveer', {
 				reservation: this.reservation,
 			}).then((response) => {
@@ -76,6 +98,7 @@ export default {
   	mounted: function () {
   		this.customer_nr = this.user.customer_nr;
   		// console.log(new Date().format('Y-mm-dd'));
+  		
   	},
 }
 

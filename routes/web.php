@@ -53,15 +53,16 @@ Route::group(['middleware' => ['auth', 'cstatus']], function () {
 	Route::get('profile/{user}/bestelling/{reservation_nr}', 'OrderController@view_customer_order_user');
 
 	Route::delete('profile/delete/reservation/{reservation_nr}', 'ReservationController@deleteReservation');
+
+	Route::post('profile/api', 'ReservationController@api');
 });
 
 Route::group(['middleware' => 'role:administrator'], function() {
     Route::get('/admin', 'AdminController@welcome')->name('admin_home');
     Route::get('/admin/users', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
-		Route::get('/admin/bestellingen', 'OrderController@index');
-		Route::get('/admin/export', 'ReservationController@export')->name('export');
-		Route::post('/admin/export', 'ReservationController@export')->name('export');
-
+	Route::get('/admin/bestellingen', 'OrderController@index');
+	Route::get('/admin/export', 'ReservationController@export')->name('export');
+	Route::post('/admin/export', 'ReservationController@export')->name('export');
 });
 
 Route::group(['middleware' => 'permission:read-order|create-order|delete-order|update-order'], function () {

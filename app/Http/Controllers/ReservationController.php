@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Reservation;
 use App\User;
 use App\Role;
+// use App\Role;
 use App\Table;
 use App\Order;
 use Carbon\Carbon;
@@ -78,6 +79,12 @@ class ReservationController extends Controller
 				$admin = User::find($admin->user_id);
 				$reservation['customer_nr'] = $admin->customer_nr;
 			}
+			if ($user->hasRole('administrator')) {
+				$table = Table::find($reservation['table_nr']);
+				$table->status = 0;
+				$table->save();
+			}
+
 
 			// if this return true there are no current similar reservations
 			$available = Reservation::where('reservation_nr', $reservation['reservation_nr'])->get();
@@ -143,8 +150,23 @@ class ReservationController extends Controller
 		else{
 			dd($request->type);
 		}
+	}
 
-
-
+	public function api(Request $request)
+	{
+		$user = (int)$request->all()['customer_nr'];
+		// dd((int)$user);
+		$user = User::find($user);
+		// dd($user);
+		// dd($user->hasRole('useristrator'));
+		if ($user->hasRole('administrator')) {
+			return response()->json([
+				'admin' => $user
+			], 200);
+		} else {
+			return response()->json([
+				'logged_user' => $user
+			], 200);
+		}
 	}
 }
