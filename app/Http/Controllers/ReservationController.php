@@ -25,11 +25,11 @@ class ReservationController extends Controller
 		// dd($today);
 		return view('pages.reservation', compact('tables', 'reservations', 'user', 'today'));
 	}
-	
+
 	public function deleteReservation(Request $request, $reservation_nr)
     {
 		$order = Order::where('reservation_nr', $reservation_nr)->get();
-		
+
 		if($order->first())
 		{
 			return redirect()->back()->with('error', 'Op deze reservering zijn al bestellingen geplaatst !');
@@ -38,11 +38,11 @@ class ReservationController extends Controller
 		{
 			$reservation = Reservation::find($reservation_nr);
 			$reservation->delete($request->all());
-		
+
 			return redirect()->back()->with('success', 'De reservering is succesvol geanulleerd !');
 		}
     }
-	
+
 	public function reservate(Request $request)
 	{
 		// get reservation from vue object
@@ -61,7 +61,7 @@ class ReservationController extends Controller
 			'reservation_nr' => 'required',
 			'customer_nr' => 'required',
 		]);
-		
+
 		// if they aren't return
 		if ($validator->fails() === true) {
 			return response()->json([
@@ -118,5 +118,33 @@ class ReservationController extends Controller
 			   'message' => 'Success'
 			], 200);
 		}
+	}
+	public function export(Request $request){
+		// dd($request->type);
+		// $type = $request->get('type');
+	  $date = Carbon::now();
+
+	  $start_week = Carbon::now()->startOfWeek()->toDateString();
+	  $end_week = Carbon::now()->endOfWeek()->toDateString();
+
+		$start_month = Carbon::now()->startOfMonth()->toDateString();
+		$end_month = Carbon::now()->endOfMonth()->toDateString();
+
+
+	  $res_week = Reservation::whereBetween('date', [$start_week, $end_week])->get();
+		$res_month = Reservation::whereBetween('date', [$start_month, $end_month])->get();
+	  $csvExporter = new \Laracsv\Export();
+
+		if ($request->type == 'week') {
+			$csvExporter->build($res_week, ['reservation_nr', 'customer_nr', 'total_guests', 'table_nr', 'time_in', 'time_out', 'date' ])->download();
+		} elseif($request->type == 'month') {
+			$csvExporter->build($res_month, ['reservation_nr', 'customer_nr', 'total_guests', 'table_nr', 'time_in', 'time_out', 'date' ])->download();
+		}
+		else{
+			dd($request->type);
+		}
+
+
+
 	}
 }

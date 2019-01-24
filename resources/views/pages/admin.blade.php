@@ -1,9 +1,23 @@
 @extends('layouts.base')
 
 @section('content')
-<div class="mb-4">
+<div class="mb-4 float-left">
     <a href="{{ url('/admin/bestellingen') }}" class="btn btn-primary nav-item nav-link ">bekijk bestellingen</a>
 </div>
+<div class="mb-4 ml-2 float-right">
+  <form method="GET" action="{{ url('/admin/export') }}" accept-charset="UTF-8">
+    <input name="type" value="month" type="hidden">
+      <button type="submit" class="btn btn-primary nav-item nav-link">Export Excel Maand</button>
+  </form>
+</div>
+<div class="mb-4 ml-5 float-right">
+  <form method="GET" action="{{ url('/admin/export') }}" accept-charset="UTF-8">
+    <input name="type" value="week" type="hidden">
+      <button type="submit" class="btn btn-primary nav-item nav-link">Export Excel Week</button>
+  </form>
+</div>
+
+
 <table class="table table-striped">
     <thead>
 		<tr>

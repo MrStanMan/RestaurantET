@@ -28,7 +28,7 @@ Route::get('menukaart', function () {
 Route::get('about', function () { return view('pages.about'); })->name('about');
 Route::get('contact', function () { return view('pages.contact'); })->name('contact');
 
-Route::group(['middleware' => ['auth', 'cstatus']], function () { 
+Route::group(['middleware' => ['auth', 'cstatus']], function () {
 	// Route::get('reserveer', function () { return view('pages.reservation'); })->name('reserveer');
 	Route::post('reserveer', 'ReservationController@reservate');
 	Route::get('reserveer', 'ReservationController@index')->name('reserveer_index');
@@ -49,16 +49,19 @@ Route::group(['middleware' => ['auth', 'cstatus']], function () {
 
 	Route::get('profile/notes/{reservation_nr}/{customer_nr}', 'CreatepdfController@index');
 	Route::get('profile/notes/{reservation_nr}/{customer_nr}/download', 'CreatepdfController@downloadPDF');
-	
+
 	Route::get('profile/{user}/bestelling/{reservation_nr}', 'OrderController@view_customer_order_user');
-	
+
 	Route::delete('profile/delete/reservation/{reservation_nr}', 'ReservationController@deleteReservation');
 });
 
 Route::group(['middleware' => 'role:administrator'], function() {
     Route::get('/admin', 'AdminController@welcome')->name('admin_home');
     Route::get('/admin/users', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
-	Route::get('/admin/bestellingen', 'OrderController@index');
+		Route::get('/admin/bestellingen', 'OrderController@index');
+		Route::get('/admin/export', 'ReservationController@export')->name('export');
+		Route::post('/admin/export', 'ReservationController@export')->name('export');
+
 });
 
 Route::group(['middleware' => 'permission:read-order|create-order|delete-order|update-order'], function () {
