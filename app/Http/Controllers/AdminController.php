@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function welcome()
     {
-    	$users = User::all(); 
-    	return view('admin.index', compact('users'));
+    	$users = User::all();
+    	return view('pages.admin', compact('users'));
     }
 }

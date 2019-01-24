@@ -42,7 +42,7 @@ class ReservationController extends Controller
 			'reservation_nr' => 'required',
 			'customer_nr' => 'required',
 		]);
-
+		
 		// if they aren't return
 		if ($validator->fails() === true) {
 			return response()->json([
@@ -58,12 +58,12 @@ class ReservationController extends Controller
 				$admin = DB::table('role_user')->where('role_id', '1')->get()->first();
 				$admin = User::find($admin->user_id);
 				$reservation['customer_nr'] = $admin->customer_nr;
-			} 
+			}
 
-			// if this return true there are no current similar reservations 
+			// if this return true there are no current similar reservations
 			$available = Reservation::where('reservation_nr', $reservation['reservation_nr'])->get();
-			
-			// loop trough all the exsisting reservations and validate 
+
+			// loop trough all the exsisting reservations and validate
 			foreach ($all_reservations as $a_reservation) {
 
 				// check if the user already has a reservation for that day
@@ -77,7 +77,7 @@ class ReservationController extends Controller
 					return response()->json([
 						'message' => 'er is al een reservatie op dit tijd stip.'
 					], 500);
-				} 
+				}
 				// check if the table is not occupied
 				if ($reservation['time_in'] == $a_reservation->time_out && $reservation_date === $a_reservation->date) {
 					return true;

@@ -25,7 +25,7 @@ class OrderController extends Controller
         $start_month = CArbon::now()->startOfMonth()->toDateString();
         $end_month = Carbon::now()->endOfMonth()->toDateString();
 
-    	$reservation = Reservation::where('date', $date->toDateString())->orderBy('date', 'desc')->get();
+        $reservation = Reservation::where('date', $date->toDateString())->orderBy('date', 'desc')->get();
     	$res_week = Reservation::whereBetween('date', [$start_week, $end_week])->get();
         $res_month = Reservation::whereBetween('date', [$start_month, $end_month])->get();
 
