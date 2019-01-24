@@ -3,6 +3,12 @@
 @section('content')
 <div class="card" style="background-color: #fff9;">
 	<div class="card-header">Account gegevens</div>
+	@if ($user->status == 1)
+		<div class="alert alert-danger" role="alert">
+			Dit account is geblokkeerd!
+		</div>
+	@endif
+
 	<div class="card-body">
 	<form action="{{ url('/profile/edit') }}/{{$user->customer_nr}}" method="POST">
 		@csrf
@@ -33,7 +39,7 @@
         </div>
 
 		<div class="form-row col-12">
-            
+
             <div class="form-group col-md-4 col-sm-4 col-12">
                 <label for="first_name" class="form-label text-lg-left">{{ __('Voornaam') }}</label>
 
