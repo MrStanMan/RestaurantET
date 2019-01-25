@@ -59,16 +59,23 @@ class AccountController extends Controller
     	$user->save();
     	return redirect()->back()->with('success', 'Gegevens geüpdate');
     }
-		public function block_user($customer_nr){
+		public function block_user($customer_nr)
+		{
 			$user = User::find($customer_nr);
-			if ($user->status == '0') {
-				$user->status = '1';
-				$user->save();
-				return redirect()->back()->with('success', 'Account geblokkeerd');
-			} else {
-				$user->status = '0';
-				$user->save();
-				return redirect()->back()->with('success', 'Account gedeblokkeerd');
+			if ($user->hasRole('administrator')){
+				return redirect()->back()->with('error', 'Je kunt beheerders niet blokkeren');
+			}
+
+			else{
+				if ($user->status == '0') {
+					$user->status = '1';
+					$user->save();
+					return redirect()->back()->with('success', 'Account geblokkeerd');
+				} else {
+					$user->status = '0';
+					$user->save();
+					return redirect()->back()->with('success', 'Account gedeblokkeerd');
+				}
 			}
 		}
     public function password_update(Request $request, $customer_nr)
