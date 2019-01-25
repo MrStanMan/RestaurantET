@@ -2052,7 +2052,8 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.admin.first_name == 'Administrator') {
           _this.admin = true;
         }
-      }); // this.onSubmit();
+      });
+      this.onSubmit();
     },
     onSubmit: function onSubmit() {
       var _this2 = this;
@@ -37335,7 +37336,7 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.onSubmit($event)
+            return _vm.checkAdmin($event)
           }
         }
       },
