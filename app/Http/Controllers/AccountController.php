@@ -89,10 +89,10 @@ class AccountController extends Controller
         ]);
 
             // dd($validator);
-        if ($validator->fails()) {
-					if ($user->password = hash::make($request->password) ) {
-						return redirect()->back()->with('error', 'Incorrecte gegevens ingevuld');
-					}
+        if ($validator->fails()) {]
+			if ($user->password = hash::make($request->password) ) {
+				return redirect()->back()->with('error', 'Incorrecte gegevens ingevuld');
+			}
 
         } elseif ($validator->fails() == false) {
             // dd($user);
@@ -107,6 +107,9 @@ class AccountController extends Controller
     	$user = User::find($customer_nr);
     	if ($request->isMethod('POST')) {
     		if (Auth::user()->can('delete-users')) {
+				if (Auth::user()->hasRole('administrator')) {
+					return redirect()->back()->with('error', 'U kunt geen admin verwijderen');
+				}
     			$user->delete();
 		    	return redirect()->route('admin_home')->with('success', 'Account verwijderd');
        		} else {

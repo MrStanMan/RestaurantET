@@ -157,10 +157,7 @@ class ReservationController extends Controller
 	public function api(Request $request)
 	{
 		$user = (int)$request->all()['customer_nr'];
-		// dd((int)$user);
 		$user = User::find($user);
-		// dd($user);
-		// dd($user->hasRole('useristrator'));
 		if ($user->hasRole('administrator')) {
 			return response()->json([
 				'admin' => $user

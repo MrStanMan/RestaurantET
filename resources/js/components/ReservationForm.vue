@@ -1,10 +1,9 @@
 <template>
-<div class="row">
-<button class="btn btn-primary" v-on:click.once="checkAdmin">incourante reservatie</button>
+<div class="">
 <div v-if="admin ? true : ''">
-	Wanneer je als admin een bestelling doet word de tafel status op gereserveerd staan. De tafels zijn vrij te geven op Deze pagina.
+	<p>Wanneer je als admin een bestelling doet word de tafel status op gereserveerd staan. De tafels zijn vrij te geven op Deze pagina.</p>
 </div>
-<form action="/reserveer" method="POST" id="resr" @submit.prevent="onSubmit">
+<form action="/reserveer" method="POST" id="resr">
 	<div class="alert alert-primary" role="alert" v-if="message != ''" v-model="message">
 		{{ message }}
 	</div>
@@ -25,15 +24,15 @@
 			</template>
 			<label for="extra_info">Extra info ( Allergieën, dieet etc. )</label>
 			<textarea form="resr" class="form-control" name="extra_info" v-model="extra_info"></textarea>
-        </div>		
+        </div>
 		<div class="form-group col-md-4 col-sm-12 col-12 ">
 			<label for="table_nr">Selecteer uw tafel</label>
 			<select class="custom-select" size="10"  style="overflow:hidden;" v-model="selected_table">
-				<option v-for="table in tables" v-if="table.status ? 1 : 0" :value="table.table_nr">Tafel: {{ table.table_nr }} stoelen : {{  }}</option>
+				<option v-for="table in tables" v-if="table.status ? 1 : 0" :value="table.table_nr">Tafel: {{ table.table_nr }} stoelen : {{ table.total_chairs }}</option>
 			</select>
 		</div>
 		<div class="col-12 align-items-end">
-			<input type="submit" name="submit" value="Reserveer" class="btn btn-primary">
+			<input type="submit" name="submit" value="Reserveer" class="btn btn-primary" v-on:click="checkAdmin">
 		</div>
     </div>
 
@@ -76,6 +75,7 @@ export default {
 					this.admin = true;
 				}
 			});
+			this.onSubmit();
   		},
   		onSubmit() {
   			// console.log(this.user);
@@ -88,7 +88,7 @@ export default {
 	  				customer_nr: parseInt(this.customer_nr),
 					extra_info: this.extra_info
   			});
-  			
+
 			axios.post('/reserveer', {
 				reservation: this.reservation,
 			}).then((response) => {
@@ -103,7 +103,7 @@ export default {
   	mounted: function () {
   		this.customer_nr = this.user.customer_nr;
   		// console.log(new Date().format('Y-mm-dd'));
-  		
+
   	},
 }
 

@@ -4,7 +4,7 @@ return [
     'role_structure' => [
         'administrator' => [
             'users' => 'c,r,u,d',
-            'profile' => 'r,u',
+            'profile' => 'c,r,u,d',
             'reservation' => 'c,r,u,d',
             'order' => 'c,r,u,d'
         ],

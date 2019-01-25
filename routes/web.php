@@ -65,7 +65,7 @@ Route::group(['middleware' => 'role:administrator'], function() {
 	Route::post('/admin/export', 'ReservationController@export')->name('export');
 });
 
-Route::group(['middleware' => 'permission:read-order|create-order|delete-order|update-order'], function () {
+Route::group(['middleware' => 'permission:read-order,create-order,delete-order,update-order'], function () {
 	Route::get('/bestellingen', 'OrderController@index')->name('orders_home');
 	Route::get('/bestelling/{customer_nr}', 'OrderController@view_customer_order')->name('view_customer_order');
 	Route::get('/bestellingen/{customer_nr}', 'OrderController@view_customer_order_json');
