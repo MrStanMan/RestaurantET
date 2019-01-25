@@ -2015,7 +2015,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2054,6 +2053,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.admin = true;
         }
       });
+      this.onSubmit();
     },
     onSubmit: function onSubmit() {
       var _this2 = this;
@@ -37316,41 +37316,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
-        on: {
-          "~click": function($event) {
-            return _vm.checkAdmin($event)
-          }
-        }
-      },
-      [_vm._v("incourante reservatie")]
-    ),
-    _vm._v(" "),
+  return _c("div", {}, [
     (_vm.admin
     ? true
     : "")
       ? _c("div", [
-          _vm._v(
-            "\n\tWanneer je als admin een bestelling doet word de tafel status op gereserveerd staan. De tafels zijn vrij te geven op Deze pagina.\n"
-          )
+          _c("p", [
+            _vm._v(
+              "Wanneer je als admin een bestelling doet word de tafel status op gereserveerd staan. De tafels zijn vrij te geven op Deze pagina."
+            )
+          ])
         ])
       : _vm._e(),
     _vm._v(" "),
     _c(
       "form",
-      {
-        attrs: { action: "/reserveer", method: "POST", id: "resr" },
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.onSubmit($event)
-          }
-        }
-      },
+      { attrs: { action: "/reserveer", method: "POST", id: "resr" } },
       [
         _vm.message != ""
           ? _c(
@@ -37553,7 +37534,7 @@ var render = function() {
                         "Tafel: " +
                           _vm._s(table.table_nr) +
                           " stoelen : " +
-                          _vm._s()
+                          _vm._s(table.total_chairs)
                       )
                     ])
                   : _vm._e()
@@ -37562,25 +37543,19 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _c("div", { staticClass: "col-12 align-items-end" }, [
+            _c("input", {
+              staticClass: "btn btn-primary",
+              attrs: { type: "submit", name: "submit", value: "Reserveer" },
+              on: { click: _vm.checkAdmin }
+            })
+          ])
         ])
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 align-items-end" }, [
-      _c("input", {
-        staticClass: "btn btn-primary",
-        attrs: { type: "submit", name: "submit", value: "Reserveer" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

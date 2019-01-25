@@ -3,13 +3,8 @@
 @section('content')
 <script src='https://www.google.com/recaptcha/api.js'></script>
 
-<style type="text/css">
-    .col-form-label{
-        padding: 0px;
-    }
-</style>
 <div class="container">
-    <div class="row justify-content-center text-white">
+    <div class="row justify-content-center">
         <div class="col-md-12 col-sm-12 col-12 col-lg-10">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
@@ -67,7 +62,7 @@
                         </div>
 
                         <div class="form-row col-12">
-                            
+
                             <div class="form-group col-md-4 col-sm-4 col-12">
                                 <label for="first_name" class="form-label text-lg-left">{{ __('Voornaam') }}</label>
 

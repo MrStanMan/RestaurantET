@@ -22,7 +22,7 @@ class OrderController extends Controller
     	$start_week = Carbon::now()->startOfWeek()->toDateString();
     	$end_week = Carbon::now()->endOfWeek()->toDateString();
 
-        $start_month = CArbon::now()->startOfMonth()->toDateString();
+        $start_month = Carbon::now()->startOfMonth()->toDateString();
         $end_month = Carbon::now()->endOfMonth()->toDateString();
 
         $reservation = Reservation::where('date', $date->toDateString())->orderBy('date', 'desc')->get();
@@ -40,11 +40,14 @@ class OrderController extends Controller
 
     public function view_customer_order_user($user, $reservation_nr)
     {
-        if(User::Check($user) != false){
-            $user = User::find($user)->get()->first();
-            $reservation = Reservation::where('reservation_nr', $reservation_nr)->get()->first();
-            $products = Product::all();
+        $user = User::where('customer_nr', $user)->get()->first();
+        $reservation = Reservation::where('reservation_nr', $reservation_nr)->get()->first();
+        $products = Product::all();
 
+        if (Auth::user()->hasRole('administrator') || Auth::user()->hasRole('employee')) {
+            return view('account.order', compact('user','reservation', 'products'));
+        }
+        if(User::Check($user) != false){
             return view('account.order', compact('user','reservation', 'products'));
         } else {
             return redirect()->back()->with('error', 'Je kunt deze bestelling niet bekijken!');

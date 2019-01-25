@@ -83,20 +83,23 @@ class AccountController extends Controller
             // dd($validator);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
-            
+
         } elseif ($validator->fails() == false) {
             // dd($user);
             $user->password = has::make($request->new_password);
             $user->save();
             return redirect()->back()->with('success', 'Wachtwoord gewijzigd');
         }
-    	
+
     }
     public function delete_account(Request $request, $customer_nr )
     {
     	$user = User::find($customer_nr);
     	if ($request->isMethod('POST')) {
     		if (Auth::user()->can('delete-users')) {
+				if (Auth::user()->hasRole('administrator')) {
+					return redirect()->back()->with('error', 'U kunt geen admin verwijderen');
+				}
     			$user->delete();
 		    	return redirect()->route('admin_home')->with('success', 'Account verwijderd');
        		} else {
