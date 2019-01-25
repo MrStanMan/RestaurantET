@@ -3,7 +3,7 @@
 <div v-if="admin ? true : ''">
 	<p>Wanneer je als admin een bestelling doet word de tafel status op gereserveerd staan. De tafels zijn vrij te geven op Deze pagina.</p>
 </div>
-<form action="/reserveer" method="POST" id="resr" @submit.prevent="checkAdmin">
+<form action="/reserveer" method="POST" id="resr" @submit.prevent="onSubmit">
 	<div class="alert alert-primary" role="alert" v-if="message != ''" v-model="message">
 		{{ message }}
 	</div>
@@ -32,7 +32,7 @@
 			</select>
 		</div>
 		<div class="col-12 align-items-end">
-			<input type="submit" name="submit" value="Reserveer" class="btn btn-primary" >
+			<input type="submit" name="submit" value="Reserveer" class="btn btn-primary" v-on:click="checkAdmin">
 		</div>
     </div>
 
@@ -75,7 +75,7 @@ export default {
 					this.admin = true;
 				}
 			});
-			this.onSubmit();
+			// this.onSubmit();
   		},
   		onSubmit() {
   			// console.log(this.user);
