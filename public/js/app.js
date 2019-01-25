@@ -37331,7 +37331,15 @@ var render = function() {
     _vm._v(" "),
     _c(
       "form",
-      { attrs: { action: "/reserveer", method: "POST", id: "resr" } },
+      {
+        attrs: { action: "/reserveer", method: "POST", id: "resr" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.checkAdmin($event)
+          }
+        }
+      },
       [
         _vm.message != ""
           ? _c(
@@ -37543,19 +37551,25 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 align-items-end" }, [
-            _c("input", {
-              staticClass: "btn btn-primary",
-              attrs: { type: "submit", name: "submit", value: "Reserveer" },
-              on: { click: _vm.checkAdmin }
-            })
-          ])
+          _vm._m(0)
         ])
       ]
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 align-items-end" }, [
+      _c("input", {
+        staticClass: "btn btn-primary",
+        attrs: { type: "submit", name: "submit", value: "Reserveer" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 

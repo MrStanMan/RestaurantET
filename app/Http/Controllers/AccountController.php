@@ -82,7 +82,7 @@ class AccountController extends Controller
         ]);
 
             // dd($validator);
-        if ($validator->fails()) {]
+        if ($validator->fails()) {
 			if ($user->password = hash::make($request->password) ) {
 				return redirect()->back()->with('error', 'Incorrecte gegevens ingevuld');
 			}
