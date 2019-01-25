@@ -61,7 +61,7 @@ class LaratrustSeeder extends Seeder
                 'address' => str_random(10),
                 'zipcode' => str_random(10),
                 'town' => str_random(10),
-                'telephone_nr' => random_int(7),
+                'telephone_nr' => random_int(7,8),
                 'email' => $key.'@app.com',
                 'password' => bcrypt('password')
             ]);
