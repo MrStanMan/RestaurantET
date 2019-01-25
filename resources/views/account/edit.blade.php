@@ -144,27 +144,29 @@
             </div>
         </div>
 
-        <div class="form-group row">
-            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Bevestig wachtwoord') }}</label>
 
-            <div class="col-md-6">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
-            </div>
-        </div>
 
-        <div class="form-group row">
-            <label for="new_password" class="col-md-4 col-form-label text-md-right">{{ __('Nieuw wachtwoord') }}</label>
+				<div class="form-group row">
+					<label for="new_password" class="col-md-4 col-form-label text-md-right">{{ __('Nieuw wachtwoord') }}</label>
 
-            <div class="col-md-6">
-                <input id="new_password" type="password" class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" name="new_password">
+					<div class="col-md-6">
+						<input id="new_password" type="password" class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" name="new_password">
 
-                @if ($errors->has('new_password'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('new_password') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
+						@if ($errors->has('new_password'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('new_password') }}</strong>
+							</span>
+						@endif
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Bevestig nieuw wachtwoord') }}</label>
+
+					<div class="col-md-6">
+						<input id="password-confirm" type="password" class="form-control" name="password_confirmation">
+					</div>
+				</div>
 
         <div class="form-group row mb-0">
             <div class="col-md-6 offset-md-4">

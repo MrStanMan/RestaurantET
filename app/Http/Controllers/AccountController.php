@@ -76,17 +76,20 @@ class AccountController extends Controller
     	$user = User::find($customer_nr);
 
         $validator = Validator::make($request->all(), [
-            'new_password' => ['required'],
-            'password' => ['required', 'required_with:password_confirmation','same:password_confirmation'],
+            'new_password' => ['required', 'required_with:password_confirmation','same:password_confirmation'],
+            'password' => ['required'],
             'password_confirmation' => ['required'],
         ]);
+
             // dd($validator);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+        if ($validator->fails()) {]
+			if ($user->password = hash::make($request->password) ) {
+				return redirect()->back()->with('error', 'Incorrecte gegevens ingevuld');
+			}
 
         } elseif ($validator->fails() == false) {
             // dd($user);
-            $user->password = has::make($request->new_password);
+            $user->password = hash::make($request->new_password);
             $user->save();
             return redirect()->back()->with('success', 'Wachtwoord gewijzigd');
         }
