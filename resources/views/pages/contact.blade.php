@@ -7,20 +7,30 @@
 		<div class="text">
 			Neem hier contact op met ons restaurant!
 		</div>
+		
 		<div class="form">
-			<form method="POST" action="">
+			<form method="POST" action="{{ route('contact.store') }}">
 				@csrf
+				@if ($errors->any())
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+				@endif
 				<div class="form-group">
 					<label for="contactname">Naam <i style="color: red;">*</i></label>
-					<input type="text" class="form-control" id="contactname" required>
+					<input type="text" class="form-control" id="contactname" name="contactname" required>
 				</div>
 				<div class="form-group">
 					<label for="contactemail">Email <i style="color: red;">*</i></label>
-					<input type="text" class="form-control" id="contactemail" required>
+					<input type="text" class="form-control" id="contactemail" name="contactemail" required>
 				</div>
 				<div class="form-group">
 					<label for="contactmessage">Uw bericht <i style="color: red;">*</i></label>
-					<textarea class="form-control" id="contactmessage" rows="3" required></textarea>
+					<textarea class="form-control" id="contactmessage" name="contactmessage" rows="3" required></textarea>
 				</div>
 				
 				<div class="form-group" width="100%">

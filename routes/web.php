@@ -25,6 +25,8 @@ Route::get('menukaart', function () {
     return view('pages.menu', compact('menu'));
 })->name('menukaart');
 
+Route::post('contact', 'ContactController@store')->name('contact.store');
+
 Route::get('about', function () { return view('pages.about'); })->name('about');
 Route::get('contact', function () { return view('pages.contact'); })->name('contact');
 
