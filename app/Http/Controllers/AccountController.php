@@ -32,10 +32,11 @@ class AccountController extends Controller
 	public function get_user($customer_nr)
 	{
 		$user = User::find($customer_nr);
-		if (Auth::user()->can('update-users') == true) {
+		// dd($user->hasRole('user'));
+		if (Auth::user()->can('update-profile') == true) {
 			return view('account.edit', compact('user'));
 		}
-		elseif ($customer_nr == Auth::id()){
+		if ($customer_nr == Auth::id()){
 	    	return view('account.edit', compact('user'));
 		} else {
 			return redirect()->back()->with('error', 'Je kunt deze gebruiker niet bewerken!');
