@@ -41,10 +41,11 @@ class OrderController extends Controller
     public function view_customer_order_user($user, $reservation_nr)
     {
         $user = User::where('customer_nr', $user)->get()->first();
+        // dd(Auth::user()->can('read-order'));
         $reservation = Reservation::where('reservation_nr', $reservation_nr)->get()->first();
         $products = Product::all();
 
-        if (Auth::user()->hasRole('administrator') || Auth::user()->hasRole('employee')) {
+        if (Auth::user()->can('read-order')) {
             return view('account.order', compact('user','reservation', 'products'));
         }
         if(User::Check($user) != false){

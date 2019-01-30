@@ -3,6 +3,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use App\User;
+
 class LaratrustSeeder extends Seeder
 {
     /**

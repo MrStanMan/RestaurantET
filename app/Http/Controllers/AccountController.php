@@ -106,7 +106,8 @@ class AccountController extends Controller
     {
     	$user = User::find($customer_nr);
     	if ($request->isMethod('POST')) {
-    		if (Auth::user()->can('delete-users')) {
+			// dd($user->can('delete-profile'));
+    		if (Auth::user()->can('delete-profile')) {
 				if (Auth::user()->hasRole('administrator')) {
 					return redirect()->back()->with('error', 'U kunt geen admin verwijderen');
 				}
@@ -125,7 +126,6 @@ class AccountController extends Controller
 		        	return redirect()->route('login')->with('success', 'account verwijderd');
 		        }
 		    }
-
     	} else {
     		return view('account.delete', compact('user'));
     	}

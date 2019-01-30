@@ -3,7 +3,7 @@
 return [
     'role_structure' => [
         'administrator' => [
-            'users' => 'c,r,u,d',
+            // 'users' => 'c,r,u,d',
             'profile' => 'c,r,u,d',
             'reservation' => 'c,r,u,d',
             'order' => 'c,r,u,d'
@@ -14,7 +14,8 @@ return [
         ],
         'user' => [
             'profile' => 'r,u,d',
-            'reservation' => 'c,r,d'
+            'reservation' => 'c,r,d',
+            'order' => 'c,r,u,d',
         ],
     ],
     'permission_structure' => [

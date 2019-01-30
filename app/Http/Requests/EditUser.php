@@ -15,7 +15,8 @@ class EditUser extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->hasRole('user') || Auth::user()->hasRole('administrator');
+        // dd(Auth::user()->can('update-profile'));
+        return Auth::user()->can('update-profile');
         // return false;
     }
 

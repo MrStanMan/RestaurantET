@@ -2053,7 +2053,6 @@ __webpack_require__.r(__webpack_exports__);
           _this.admin = true;
         }
       });
-      this.onSubmit();
     },
     onSubmit: function onSubmit() {
       var _this2 = this;
@@ -37336,7 +37335,7 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.checkAdmin($event)
+            return _vm.onSubmit($event)
           }
         }
       },

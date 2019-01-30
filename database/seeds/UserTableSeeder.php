@@ -13,6 +13,7 @@ class UserTableSeeder extends Seeder
     {
         factory(App\User::class, 10)->create()->each(function ($user) {
 	        $user =	factory(App\User::class)->make();
+            $user->attachRole('user');
 	    });
     }
 }

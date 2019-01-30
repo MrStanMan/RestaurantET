@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="homepage">
-	<div id="homepageCarousel" class="carousel slide" data-ride="carousel">
+	<div id="homepageCarousel" class="carousel slide col" data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
 				<img class="d-block w-100" src="http://www.studiomova.nl/wp-content/themes/mova/img/cuttlery.jpg" alt="First slide">
@@ -23,9 +23,9 @@
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-	
+
 	Welkom op de website van Restaurant Excellent Taste! <br>
 	Op deze website kunt u doormiddel van een account reserveren voor een gezellig avondje eten! <br>
-	
+
 </div>
 @endsection

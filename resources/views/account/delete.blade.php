@@ -20,13 +20,13 @@
                 <div class="form-group">
                     <p>Weet u zeker dat u dit account wilt verwijderen!<br>
                         Deze actie is niet terug te draaien!<br>
+                        <b>Als administrator hoeft u geen wachtwoord in te vullen</b>
                     </p>
                     <div class="form-group col-md-6 col-sm-6 col-12">
                         <input type="submit" class="btn btn-lg btn-danger" name="submit">
                     </div>
                 </div>
                 @endrole
-                @role('user', 'employee')
                 <div class="form-row col-12">
                     <div class="form-group col-md-6 col-sm-12 col-12">
                         <label for="password" class="form-label text-lg-left">Wachtwoord</label>
@@ -45,7 +45,6 @@
                         <input type="submit" class="btn btn-lg btn-danger" name="submit">
                     </div>
                 </div>
-                @endrole
             </form>
         </div>
     </div>
