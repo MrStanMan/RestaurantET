@@ -145,9 +145,9 @@ class ReservationController extends Controller
 	  $csvExporter = new \Laracsv\Export();
 
 		if ($request->type == 'week') {
-			$csvExporter->build($res_week, ['reservation_nr', 'customer_nr', 'total_guests', 'table_nr', 'time_in', 'time_out', 'date' ])->download();
+			$csvExporter->build($res_week, ['reservation_nr', 'customer_nr','user.first_name', 'user.last_name', 'total_guests', 'table_nr', 'time_in', 'time_out', 'date', 'user.telephone_nr', 'user.email'])->download();
 		} elseif($request->type == 'month') {
-			$csvExporter->build($res_month, ['reservation_nr', 'customer_nr', 'total_guests', 'table_nr', 'time_in', 'time_out', 'date' ])->download();
+			$csvExporter->build($res_week, ['reservation_nr', 'customer_nr','user.first_name', 'user.last_name', 'total_guests', 'table_nr', 'time_in', 'time_out', 'date', 'user.telephone_nr', 'user.email'])->download();
 		}
 		else{
 			dd($request->type);

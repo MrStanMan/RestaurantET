@@ -109,7 +109,7 @@ class AccountController extends Controller
     	if ($request->isMethod('POST')) {
 			// dd($user->can('delete-profile'));
     		if (Auth::user()->can('delete-profile')) {
-				if (Auth::user()->hasRole('administrator')) {
+				if ($user->hasRole('administrator')) {
 					return redirect()->back()->with('error', 'U kunt geen admin verwijderen');
 				}
     			$user->delete();
